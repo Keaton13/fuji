@@ -4,7 +4,6 @@ const jwt = require('jwt-simple');
 
 const db = require('./database');
 const ClientError = require('./client-error');
-const auth = require('./auth');
 const staticMiddleware = require('./static-middleware');
 const sessionMiddleware = require('./session-middleware');
 const PORT = process.env.PORT || 3000;
@@ -120,7 +119,7 @@ app.post('/api/sign-in', async (req, res, next) => {
   }
 });
 
-app.get('/api/users', auth, async (req, res, next) => {
+app.get('/api/users', async (req, res, next) => {
   try {
     if (!req.user) {
       throw new ClientError('Not authorized', 401);
