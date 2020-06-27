@@ -26,10 +26,9 @@ app.get('/api/health-check', (req, res, next) => {
 app.post('/api/sign-up', async (req, res, next) => {
   try {
     const { username, password, name, email } = req.body;
-
-    if (!name) throw new ClientError(`${name} is not defined`, 404);
-    if (!email) throw new ClientError(`${email} is not defined`, 404);
-    if (!password) throw new ClientError(`${password} is not defined`, 404);
+    if (!name) throw new ClientError(`${name} name is not defined`, 404);
+    if (!email) throw new ClientError(`${email} email is not defined`, 404);
+    if (!password) throw new ClientError(`${password} password is not defined`, 404);
 
     const passHash = await hash.generate(password);
 

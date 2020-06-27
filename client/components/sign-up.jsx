@@ -12,6 +12,7 @@ class SignUp extends React.Component {
       Date: ''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.sendLoginData = this.sendLoginData.bind(this);
   }
 
   handleInputChange(e) {
@@ -39,15 +40,14 @@ class SignUp extends React.Component {
   }
 
   sendLoginData() {
-    const data = '';
+    const data = this.state;
     fetch('http://localhost:3000/api/sign-up',
       {
         method: 'POST',
         headers: {
-          Accept: 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ data })
+        body: JSON.stringify(data)
       })
       .then(res => {
         return res.json();
@@ -88,7 +88,7 @@ class SignUp extends React.Component {
               <input className="form-control" name="date" type="date" id="example-date-input" value={this.state.date} onChange={e => this.handleInputChange(e)}></input>
             </div>
             <div className="text-center mt-4">
-              <button name="button" className="btn btn-dark align-center w-75">Send it!</button>
+              <button name="button" type="button" className="btn btn-dark align-center w-75" onClick={this.sendLoginData}>Send it!</button>
             </div>
             <div className="text-center">
               <img src={Finger} className="w-25 finger"></img>
