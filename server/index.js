@@ -75,16 +75,16 @@ app.post('/api/sign-up', async (req, res, next) => {
 
 app.post('/api/sign-in', async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
     const errorMessage = 'Invalid email/password combination';
 
-    if (!email) throw new ClientError('Missing users email', 422);
+    if (!username) throw new ClientError('Missing users username', 422);
     if (!password) throw new ClientError('Missing users password', 422);
 
     const { rows: [user = null] } = await db.query(`
       SELECT "user_id", "password" FROM "users"
-      WHERE "email" = $1`,
-    [email]
+      WHERE "username" = $1`,
+    [username]
     );
 
     if (!user) {
