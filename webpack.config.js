@@ -24,6 +24,19 @@ module.exports = {
             ]
           }
         }
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader?modules'
+      },
+      {
+        test: /\.(jpg|png|svg)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 25000
+          }
+        }
       }
     ]
   },
