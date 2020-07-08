@@ -42,7 +42,9 @@ export default class App extends React.Component {
       if (this.state.view.name === 'sign-up') {
         view = <SignUp setView={this.setView}/>;
       } else {
-        view = <SignIn setView={this.setView}/>;
+        // view = <SignIn setView={this.setView}/>;
+        view = <SignIn />;
+
       }
       return (
         <div>
