@@ -1,6 +1,7 @@
 import React from 'react';
 import SignUp from './sign-up';
-import SignIn from './sign-in';
+// import SignIn from './sign-in';
+import SelectImage from './select-image';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ export default class App extends React.Component {
         view = <SignUp setView={this.setView}/>;
       } else {
         // view = <SignIn setView={this.setView}/>;
-        view = <SignIn />;
+        view = <SelectImage />;
 
       }
       return (
