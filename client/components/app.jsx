@@ -1,13 +1,20 @@
 import React from 'react';
 import SignUp from './sign-up';
+import SignIn from './sign-in';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       message: null,
-      isLoading: true
+      isLoading: true,
+      isLoggedIn: false,
+      view: {
+        name: 'sign-in',
+        params: {}
+      }
     };
+    this.setView = this.setView.bind(this);
   }
 
   componentDidMount() {
@@ -18,9 +25,30 @@ export default class App extends React.Component {
       .finally(() => this.setState({ isLoading: false }));
   }
 
+  setView(name, params) {
+    this.setState({
+      view: {
+        name: name,
+        params: params
+      }
+    });
+  }
+
   render() {
-    return this.state.isLoading
-      ? <h1>Testing connections...</h1>
-      : <SignUp />;
+    if (this.state.isLoading) {
+      return <h1>Testing Connections...</h1>;
+    } else {
+      let view;
+      if (this.state.view.name === 'sign-up') {
+        view = <SignUp setView={this.setView}/>;
+      } else {
+        view = <SignIn setView={this.setView}/>;
+      }
+      return (
+        <div>
+          { view }
+        </div>
+      );
+    }
   }
 }

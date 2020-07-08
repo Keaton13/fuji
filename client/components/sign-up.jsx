@@ -1,9 +1,10 @@
 import React from 'react';
 import Header from './header';
 import Finger from '../../server/public/images/unnamed.png';
+
 class SignUp extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       name: '',
       email: '',
@@ -13,6 +14,7 @@ class SignUp extends React.Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.sendLoginData = this.sendLoginData.bind(this);
+    this.handleViewChange = this.handleViewChange.bind(this);
   }
 
   handleInputChange(e) {
@@ -39,6 +41,10 @@ class SignUp extends React.Component {
     }
   }
 
+  handleViewChange() {
+    this.props.setView('sign-in');
+  }
+
   sendLoginData() {
     const data = this.state;
     fetch('http://localhost:3000/api/sign-up',
@@ -53,7 +59,9 @@ class SignUp extends React.Component {
         return res.json();
       })
       .then(json => {
-        // console.log(json);
+        if (json.token) {
+          this.handleViewChange();
+        }
       })
       .catch(err => {
         console.error(err);
