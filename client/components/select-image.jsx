@@ -13,7 +13,9 @@ class selectImage extends React.Component {
   }
 
   onChange(e) {
-    this.setState({ file: e.target.files[0] });
+    this.setState({
+      file: URL.createObjectURL(event.target.files[0])
+    });
   }
 
   onFormSubmit(e) {
@@ -51,8 +53,12 @@ class selectImage extends React.Component {
       <div>
         <Header />
         <div className='container'>
+          <div className='row'>
+            <img src={this.state.file} className="img-fluid"></img>
+          </div>
+
           <form encType="multipart/form-data" action="">
-            <div className='form-group align-center'>
+            <div className='form-group align-center mt-3'>
               <input
                 name='avatar'
                 type='file'
