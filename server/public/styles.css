@@ -24,3 +24,10 @@
     margin-top: 8%
 
 }
+.listItem:hover {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;}
+.listItem {
+    color: rgb(26, 20, 20)
+}

@@ -133,9 +133,9 @@ app.post('/api/sign-in', async (req, res, next) => {
 
 app.get('/api/users', async (req, res, next) => {
   try {
-    if (!req.user) {
-      throw new ClientError('Not authorized', 401);
-    }
+    // if (!req.user) {
+    //   throw new ClientError('Not authorized', 401);
+    // }
 
     const { rows: products = [] } = await db.query('SELECT * FROM "users"');
 

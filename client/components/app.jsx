@@ -1,7 +1,8 @@
 import React from 'react';
 import SignUp from './sign-up';
-// import SignIn from './sign-in';
-import SelectImage from './select-image';
+import SignIn from './sign-in';
+// import SelectImage from './select-image';
+import Home from './home';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class App extends React.Component {
       isLoading: true,
       isLoggedIn: false,
       view: {
-        name: 'sign-in',
+        name: 'home',
         params: {}
       }
     };
@@ -36,16 +37,17 @@ export default class App extends React.Component {
   }
 
   render() {
+    // console.log(this.state);
     if (this.state.isLoading) {
       return <h1>Testing Connections...</h1>;
     } else {
       let view;
       if (this.state.view.name === 'sign-up') {
         view = <SignUp setView={this.setView}/>;
-      } else {
-        // view = <SignIn setView={this.setView}/>;
-        view = <SelectImage />;
-
+      } else if (this.state.view.name === 'sign-in') {
+        view = <SignIn setView={this.setView}/>;
+      } else if (this.state.view.name === 'home') {
+        view = <Home setView={this.setView}/>;
       }
       return (
         <div>
