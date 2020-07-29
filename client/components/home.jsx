@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './header';
+import Footer from './footer';
 
 class Home extends React.Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class Home extends React.Component {
   }
 
   loadUserProfile(user) {
-    this.props.setView('home', user);
+    this.props.setView('profile', user);
   }
 
   renderUsers(user) {
@@ -91,6 +92,9 @@ class Home extends React.Component {
                   })
                 }
               </ul>
+            </div>
+            <div className="row">
+              <Footer setView={this.props.setView} id="footer"/>
             </div>
           </div>
         </div>

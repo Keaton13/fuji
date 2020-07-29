@@ -27,7 +27,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(staticMiddleware);
 app.use(sessionMiddleware);
-
 app.use(express.json());
 
 app.get('/api/health-check', (req, res, next) => {
@@ -76,7 +75,9 @@ app.post('/api/sign-up', async (req, res, next) => {
     // Use jwt to encode the tokenData object
     // Save the token into a const named "token"
     res.send({
-      token: token
+      token: token,
+      userId: insertId,
+      userName: username
     });
 
     // Send the token to the client
@@ -124,7 +125,8 @@ app.post('/api/sign-in', async (req, res, next) => {
 
     // Send the token to the client
     res.send({
-      Token: token
+      Token: token,
+      userName: username
     });
   } catch (error) {
     next(error);
@@ -168,6 +170,82 @@ app.post('/api/upload-avatar', async (req, res) => {
           size: avatar.size
         }
       });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.post('/api/upload-profile', async (req, res) => {
+  try {
+    if (!req.files) {
+      res.send({
+        status: false,
+        message: 'No file uploaded'
+      });
+    } else {
+      // Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
+      const profile = req.files.profile;
+      // Use the mv() method to place the file in upload directory (i.e. "uploads")
+      profile.mv('./uploads/users/' + profile.name);
+
+      // send response
+      res.send({
+        status: true,
+        message: 'File is uploaded',
+        data: {
+          name: profile.name,
+          mimetype: profile.mimetype,
+          size: profile.size
+        }
+      });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.get('/api/profileData/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    db.query(`SELECT * FROM "profiledata" WHERE "user_id" = ${userId}`)
+      .then(result => {
+        res.json(result.rows[0]);
+      })
+      .catch(err => next(new ClientError(err, 404)));
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.post('/api/upload-data', async (req, res) => {
+  try {
+    if (req.body.data.status === true) {
+      try {
+        const userId = req.body.userId;
+        const description = req.body.description;
+        const profilepicurl = req.body.profilepicurl;
+        const { rows: [newUser] } = await db.query(`
+          INSERT INTO "profiledata"
+          ("user_id", "numberofposts", "saved", "description", "profilepicurl")
+          VALUES ($1, $2, $3, $4, $5)
+          returning "user_id"`,
+        [userId, 0, 0, description, profilepicurl]
+        );
+        // console.log(newUser);
+        // insertId = newUser.user_id;
+
+        res.status(200).send({
+          message: 'Data has been sent successfully!',
+          status: 200
+        });
+      } catch (error) {
+        if (error.code === '23505') {
+          throw new ClientError('email already in use', 422);
+        }
+        throw new ClientError('error saving user', 500);
+      }
+
     }
   } catch (err) {
     res.status(500).send(err);

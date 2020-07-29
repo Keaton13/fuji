@@ -26,8 +26,8 @@ class SignIn extends React.Component {
     this.props.setView('sign-up');
   }
 
-  handleSignIn() {
-    this.props.setView('home');
+  handleSignIn(token) {
+    this.props.setView('home', null, token.userName);
   }
 
   signInData() {
@@ -45,7 +45,7 @@ class SignIn extends React.Component {
       })
       .then(json => {
         if (json.Token) {
-          this.handleSignIn();
+          this.handleSignIn(json);
         }
       })
       .catch(err => {

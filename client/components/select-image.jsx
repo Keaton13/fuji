@@ -40,7 +40,7 @@ class selectImage extends React.Component {
         return res.json();
       })
       .then(json => {
-        // console.log(json);
+        this.props.setView('home');
       })
       .catch(err => {
         console.error(err);

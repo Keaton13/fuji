@@ -41,8 +41,8 @@ class SignUp extends React.Component {
     }
   }
 
-  handleViewChange() {
-    this.props.setView('sign-in');
+  handleViewChange(user) {
+    this.props.setView('sign-up2', null, user.userId, user.userName);
   }
 
   sendLoginData() {
@@ -60,7 +60,7 @@ class SignUp extends React.Component {
       })
       .then(json => {
         if (json.token) {
-          this.handleViewChange();
+          this.handleViewChange(json);
         }
       })
       .catch(err => {
@@ -91,12 +91,8 @@ class SignUp extends React.Component {
               <label htmlFor="exampleInputPassword1">Password</label>
               <input name="password" type="password" className="form-control" id="exampleInputPassword1" value={this.state.password} onChange={e => this.handleInputChange(e)} placeholder="Password"></input>
             </div>
-            <div className="form-group row ml-1">
-              <label htmlFor="exampleInputDate1">Date</label>
-              <input className="form-control" name="date" type="date" id="example-date-input" value={this.state.date} onChange={e => this.handleInputChange(e)}></input>
-            </div>
             <div className="text-center mt-4">
-              <button name="button" type="button" className="btn btn-dark align-center w-75" onClick={this.sendLoginData}>Send it!</button>
+              <button name="button" type="button" className="btn btn-dark align-center w-75" onClick={this.sendLoginData}>Next</button>
             </div>
             <div className="text-center">
               <img src={Finger} className="w-25 finger"></img>
