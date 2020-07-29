@@ -61,10 +61,10 @@ class Profile extends React.Component {
           <div className='contianer borderLineBot'>
             <div className='row h-100'>
               <div className='col-4 pr-0'>
-                <img src={url} className='mw-65 ml-4'></img>
+                <img src={url} className='mw-100 ml-1 mr-1'></img>
               </div>
               <div className='col-8 text-center pl-0'>
-                <div className='row'>
+                <div className='row ml-2'>
                   <div className='col'>
                     <h6 className='mb-1'>{user.Name}</h6>
                     <h6>{'@' + user.username}</h6>
@@ -78,7 +78,7 @@ class Profile extends React.Component {
                     <h6>Posts</h6>
                   </div>
                 </div>
-                <div className='row'>
+                <div className='row ml-2'>
                   <p className='ml-3'>{profileData.description}</p>
                 </div>
               </div>
