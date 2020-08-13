@@ -13,7 +13,7 @@ class Footer extends React.Component {
 
   render() {
     return (
-      <div className='container'>
+      <div className='container fixed-bottom'>
         <div className='row'>
           <div className='col text-center'>
             <img src={user} className="w-50" onClick={() => this.handleSetView('select-image')}></img>
@@ -22,7 +22,7 @@ class Footer extends React.Component {
             <img src={user} className="w-50" onClick={() => this.handleSetView('home')}></img>
           </div>
           <div className='col text-center'>
-            <img src={user} className="w-50" onClick={() => this.handleSetView}></img>
+            <img src={user} className="w-50" onClick={() => this.handleSetView('profile')}></img>
           </div>
         </div>
       </div>

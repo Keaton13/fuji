@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './header';
+import Footer from './footer';
 
 class selectImage extends React.Component {
   constructor() {
@@ -78,6 +79,7 @@ class selectImage extends React.Component {
               </button>
             </div>
           </form>
+          <Footer setView={this.props.setView} />
         </div>
       </div>
     );

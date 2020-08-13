@@ -56,6 +56,9 @@ app.post('/api/sign-up', async (req, res, next) => {
       );
       // console.log(newUser);
       insertId = newUser.user_id;
+      if (req.session.userId === undefined) {
+        req.session.userId = insertId;
+      }
     } catch (error) {
       if (error.code === '23505') {
         throw new ClientError('email already in use', 422);
@@ -118,7 +121,8 @@ app.post('/api/sign-in', async (req, res, next) => {
       userId: user.userId,
       ts: 1588731932
     };
-
+    req.session.userId = user.user_id;
+    req.session.save();
     // Use jwt to encode the tokenData object
     // Save the token into a const named "token"
     const token = jwt.encode(tokenData, jwtSecret);
@@ -126,7 +130,8 @@ app.post('/api/sign-in', async (req, res, next) => {
     // Send the token to the client
     res.send({
       Token: token,
-      userName: username
+      userName: username,
+      userId: user.user_id
     });
   } catch (error) {
     next(error);
@@ -147,6 +152,25 @@ app.get('/api/users', async (req, res, next) => {
   }
 });
 
+app.get('/api/grabUserInfo/:userId', async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const { rows: [newUser] } = await db.query(`
+    SELECT * FROM "users" WHERE "user_id" = ${userId}`
+    );
+    res.send({
+      status: true,
+      message: 'Current user',
+      data: {
+        userName: newUser.username,
+        name: newUser.Name
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.post('/api/upload-avatar', async (req, res) => {
   try {
     if (!req.files) {
@@ -158,8 +182,15 @@ app.post('/api/upload-avatar', async (req, res) => {
       // Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
       const avatar = req.files.avatar;
       // Use the mv() method to place the file in upload directory (i.e. "uploads")
-      avatar.mv('./uploads/' + avatar.name);
+      avatar.mv('./server/public/images/uploads/users/' + avatar.name);
 
+      const { rows: [newUser] } = await db.query(`
+      INSERT INTO "userPosts"
+      ("userId", "pictureUrl")
+      VALUES ($1, $2)
+      returning "userId"`,
+      [req.session.userId, avatar.name]
+      );
       // send response
       res.send({
         status: true,
@@ -187,7 +218,7 @@ app.post('/api/upload-profile', async (req, res) => {
       // Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
       const profile = req.files.profile;
       // Use the mv() method to place the file in upload directory (i.e. "uploads")
-      profile.mv('./uploads/users/' + profile.name);
+      profile.mv('./server/public/images/uploads/users/' + profile.name);
 
       // send response
       res.send({
@@ -208,11 +239,7 @@ app.post('/api/upload-profile', async (req, res) => {
 app.get('/api/profileData/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
-    db.query(`SELECT * FROM "profiledata" WHERE "user_id" = ${userId}`)
-      .then(result => {
-        res.json(result.rows[0]);
-      })
-      .catch(err => next(new ClientError(err, 404)));
+    db.query(`SELECT * FROM "profiledata" WHERE "user_id" = ${userId}`);
   } catch (err) {
     res.status(500).send(err);
   }
@@ -232,9 +259,6 @@ app.post('/api/upload-data', async (req, res) => {
           returning "user_id"`,
         [userId, 0, 0, description, profilepicurl]
         );
-        // console.log(newUser);
-        // insertId = newUser.user_id;
-
         res.status(200).send({
           message: 'Data has been sent successfully!',
           status: 200

@@ -55,7 +55,7 @@ class SignUp2 extends React.Component {
 
   sendData(data) {
     const userData = {
-      userId: this.props.userParams.userId,
+      userId: this.props.userParams.user_id,
       description: this.state.description,
       profilepicurl: data.data.name,
       data: data

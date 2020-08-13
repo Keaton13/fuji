@@ -42,7 +42,8 @@ class SignUp extends React.Component {
   }
 
   handleViewChange(user) {
-    this.props.setView('sign-up2', null, user.userId, user.userName);
+    this.props.saveUserData(user.userName, user.userId);
+    this.props.setView('sign-up2');
   }
 
   sendLoginData() {

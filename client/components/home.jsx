@@ -32,7 +32,8 @@ class Home extends React.Component {
   }
 
   loadUserProfile(user) {
-    this.props.setView('profile', user);
+    this.props.saveSelectedData(user);
+    this.props.setView('profile');
   }
 
   renderUsers(user) {
@@ -94,7 +95,7 @@ class Home extends React.Component {
               </ul>
             </div>
             <div className="row">
-              <Footer setView={this.props.setView} id="footer"/>
+              <Footer setView={this.props.setView} userParams={this.props.userParams} id="footer"/>
             </div>
           </div>
         </div>
