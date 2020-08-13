@@ -1,7 +1,11 @@
 import React from 'react';
 import SignUp from './sign-up';
-// import SignIn from './sign-in';
+import SignIn from './sign-in';
 import SelectImage from './select-image';
+import Home from './home';
+import Profile from './profile';
+import SignUp2 from './sign-up2';
+import Footer from './footer';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,9 +17,18 @@ export default class App extends React.Component {
       view: {
         name: 'sign-in',
         params: {}
+      },
+      selectedUserParams: {
+        data: {}
+      },
+      userParams: {
+        userName: null,
+        user_id: null
       }
     };
     this.setView = this.setView.bind(this);
+    this.saveUserData = this.saveUserData.bind(this);
+    this.saveSelectedData = this.saveSelectedData.bind(this);
   }
 
   componentDidMount() {
@@ -26,11 +39,58 @@ export default class App extends React.Component {
       .finally(() => this.setState({ isLoading: false }));
   }
 
-  setView(name, params) {
+  setView(view) {
     this.setState({
       view: {
-        name: name,
-        params: params
+        name: view
+      }
+    });
+    // if (params == null) {
+    //   this.setState({
+    //     isLoggedIn: true,
+    //     view: {
+    //       name: name
+    //     },
+    //     userParams: {
+    //       userName: userName,
+    //       user_id: userId
+    //     }
+    //   });
+    // } else if (params == null && userId == null && userName == null) {
+    //   this.setState({
+    //     isLoggedIn: true,
+    //     view: {
+    //       name: name
+    //     }
+    //   });
+    // } else {
+    //   this.setState({
+    //     isLoggedIn: true,
+    //     view: {
+    //       name: name,
+    //       params: params
+    //     },
+    //     userParams: {
+    //       userName: this.state.userParams.userName,
+    //       user_id: this.state.userParams.user_id
+    //     }
+    //   });
+    // }
+  }
+
+  saveUserData(userName, userId) {
+    this.setState({
+      userParams: {
+        userName: userName,
+        user_id: userId
+      }
+    });
+  }
+
+  saveSelectedData(data) {
+    this.setState({
+      selectedUserParams: {
+        data: data
       }
     });
   }
@@ -41,12 +101,22 @@ export default class App extends React.Component {
     } else {
       let view;
       if (this.state.view.name === 'sign-up') {
-        view = <SignUp setView={this.setView}/>;
+        view = <SignUp setView={this.setView} saveUserData={this.saveUserData}/>;
+      } else if (this.state.view.name === 'sign-in') {
+        view = <SignIn setView={this.setView} saveUserData={this.saveUserData}/>;
+      } else if (this.state.view.name === 'home') {
+        view = <Home setView={this.setView} userParams={this.state.userParams} saveSelectedData={this.saveSelectedData}/>;
+      } else if (this.state.view.name === 'profile') {
+        view = <Profile setView={this.setView} userParams={this.state.userParams} selectedUserParams={this.state.selectedUserParams} saveSelectedData={this.saveSelectedData}/>;
+      } else if (this.state.view.name === 'sign-up2') {
+        view = <SignUp2 setView={this.setView} userParams={this.state.userParams}/>;
+      } else if (this.state.view.name === 'select-image') {
+        view = <SelectImage setView={this.setView} userParams={this.state.userParams}/>;
       } else {
-        // view = <SignIn setView={this.setView}/>;
-        view = <SelectImage />;
+        view = <Footer setView={this.setView} />;
 
       }
+
       return (
         <div>
           { view }

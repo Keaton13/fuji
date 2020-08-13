@@ -1,26 +1,48 @@
 .logo {
-    background-image: url(/images/mountains-outline-png-2.png);
-    background-color: #cccccc;
+  background-image: url(/images/mountains-outline-png-2.png);
+  background-color: #cccccc;
 }
-.width100{
-    width: 100%;
+.width100 {
+  width: 100%;
 }
 .Mg1 {
-    margin-top: 5%;
+  margin-top: 5%;
 }
 .line {
-    position: absolute;
-    left: 0%;
-    right: 67.28%;
-    top: 109.84%;
-    bottom: -9.84%;
-    border: 1px solid #B8B8B8;
+  position: absolute;
+  left: 0%;
+  right: 67.28%;
+  top: 109.84%;
+  bottom: -9.84%;
+  border: 1px solid #b8b8b8;
 }
 .borderLine {
-    border-top: 2px solid;
+  border-top: 2px solid;
+}
+.borderLineBot {
+  border-bottom: 2px solid;
 }
 .finger {
-    transform: rotate(-45deg);
-    margin-top: 8%
-
+  transform: rotate(-45deg);
+  margin-top: 8%;
+}
+.listItem:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+}
+.listItem {
+  color: rgb(26, 20, 20);
+}
+.mw-65 {
+  max-width: 60%;
+}
+#footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+#footerContainer{
+    padding-bottom:60px;
 }
