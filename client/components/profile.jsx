@@ -70,7 +70,7 @@ class Profile extends React.Component {
         if (this.props.selectedUserParams.data.user_id) {
           this.setState({
             profileData: {
-              data: json
+              data: json.data
             },
             user: {
               name: this.props.selectedUserParams.data.Name,
@@ -81,7 +81,7 @@ class Profile extends React.Component {
           try {
             this.setState({
               profileData: {
-                data: json
+                data: json.data
               }
             });
             this.grabUserInfo(userId);
@@ -101,9 +101,9 @@ class Profile extends React.Component {
   }
 
   render() {
-
     const user = this.state.user;
     const profileData = this.state.profileData.data;
+
     if (profileData !== null && user.name !== null) {
       const url =
         window.location.origin +

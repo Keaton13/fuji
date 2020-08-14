@@ -239,7 +239,10 @@ app.post('/api/upload-profile', async (req, res) => {
 app.get('/api/profileData/:userId', async (req, res) => {
   try {
     const userId = req.params.userId;
-    db.query(`SELECT * FROM "profiledata" WHERE "user_id" = ${userId}`);
+    const { rows: [profileData] } = await db.query(`SELECT * FROM "profiledata" WHERE "user_id" = ${userId}`);
+    res.send({
+      data: profileData
+    });
   } catch (err) {
     res.status(500).send(err);
   }
