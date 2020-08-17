@@ -45,37 +45,6 @@ export default class App extends React.Component {
         name: view
       }
     });
-    // if (params == null) {
-    //   this.setState({
-    //     isLoggedIn: true,
-    //     view: {
-    //       name: name
-    //     },
-    //     userParams: {
-    //       userName: userName,
-    //       user_id: userId
-    //     }
-    //   });
-    // } else if (params == null && userId == null && userName == null) {
-    //   this.setState({
-    //     isLoggedIn: true,
-    //     view: {
-    //       name: name
-    //     }
-    //   });
-    // } else {
-    //   this.setState({
-    //     isLoggedIn: true,
-    //     view: {
-    //       name: name,
-    //       params: params
-    //     },
-    //     userParams: {
-    //       userName: this.state.userParams.userName,
-    //       user_id: this.state.userParams.user_id
-    //     }
-    //   });
-    // }
   }
 
   saveUserData(userName, userId) {

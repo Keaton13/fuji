@@ -171,6 +171,22 @@ app.get('/api/grabUserInfo/:userId', async (req, res, next) => {
   }
 });
 
+app.get('/api/grabUserPosts/:userId', async (req, res, next) => {
+  try {
+    const userId = req.params.userId;
+    const { rows: posts = [] } = await db.query(`
+    SELECT * FROM "userPosts" WHERE "userId" = ${userId}`
+    );
+    res.send({
+      status: true,
+      message: `Successfully loaded user ${userId}'s posts`,
+      data: posts
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.post('/api/upload-avatar', async (req, res) => {
   try {
     if (!req.files) {
@@ -182,7 +198,7 @@ app.post('/api/upload-avatar', async (req, res) => {
       // Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
       const avatar = req.files.avatar;
       // Use the mv() method to place the file in upload directory (i.e. "uploads")
-      avatar.mv('./server/public/images/uploads/users/' + avatar.name);
+      avatar.mv('./server/public/images/uploads/' + avatar.name);
 
       const { rows: [newUser] } = await db.query(`
       INSERT INTO "userPosts"
