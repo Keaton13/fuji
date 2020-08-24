@@ -6,6 +6,7 @@ import Home from './home';
 import Profile from './profile';
 import SignUp2 from './sign-up2';
 import Footer from './footer';
+import PostHome from './postHome';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -81,6 +82,8 @@ export default class App extends React.Component {
         view = <SignUp2 setView={this.setView} userParams={this.state.userParams}/>;
       } else if (this.state.view.name === 'select-image') {
         view = <SelectImage setView={this.setView} userParams={this.state.userParams}/>;
+      } else if (this.state.view.name === 'postHome') {
+        view = <PostHome setView={this.setView}/>;
       } else {
         view = <Footer setView={this.setView} />;
 

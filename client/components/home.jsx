@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './header';
 import Footer from './footer';
+import Switch from 'react-switch';
 
 class Home extends React.Component {
   constructor(props) {
@@ -8,10 +9,12 @@ class Home extends React.Component {
     this.state = {
       users: null,
       currentUser: null,
-      search: ''
+      search: '',
+      checked: true
     };
     this.loadUserProfile = this.loadUserProfile.bind(this);
     this.onSearchChange = this.onSearchChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +32,26 @@ class Home extends React.Component {
       .catch(err => {
         console.error(err);
       });
+  }
+
+  handleChange(checked) {
+    if (checked === true) {
+      this.setState({
+        checked: checked,
+        buttonText: 'Explore Mode'
+      });
+      setTimeout(() => {
+        this.props.setView('home');
+      }, 500);
+    } else {
+      this.setState({
+        checked: checked,
+        buttonText: 'Home'
+      });
+      setTimeout(() => {
+        this.props.setView('postHome');
+      }, 500);
+    }
   }
 
   loadUserProfile(user) {
@@ -65,18 +88,27 @@ class Home extends React.Component {
         <div>
           <Header />
           <div className='container'>
-            <div className='row'>
-              <div className='col'>
-                <div className='input-group mb-3'>
+            <div className='row mb-3'>
+              <div className='col-8 mt-3'>
+                <div className='input-group'>
                   <div className='input-group-prepend'></div>
                   <input
                     type='search'
-                    className='form-control rounded-pill'
+                    className='form-control rounded-pill w-75'
                     aria-label='Search....'
                     placeholder='Search'
                     aria-describedby='inputGroup-sizing-default'
                     onChange={this.onSearchChange}
                   ></input>
+                </div>
+              </div>
+              <div className='col-4'>
+                <div className='text-center mt-1'>
+                  <h6>Explore</h6>
+                  <Switch
+                    onChange={this.handleChange}
+                    checked={this.state.checked}
+                  />
                 </div>
               </div>
             </div>
@@ -87,20 +119,21 @@ class Home extends React.Component {
             </div>
             <div className='row d-flex'>
               <ul className='list-group w-75 mx-auto'>
-                {
-                  filteredUsers.map(user => {
-                    return this.renderUsers(user);
-                  })
-                }
+                {filteredUsers.map(user => {
+                  return this.renderUsers(user);
+                })}
               </ul>
             </div>
-            <div className="row">
-              <Footer setView={this.props.setView} userParams={this.props.userParams} id="footer"/>
+            <div className='row'>
+              <Footer
+                setView={this.props.setView}
+                userParams={this.props.userParams}
+                id='footer'
+              />
             </div>
           </div>
         </div>
       );
-
     } else {
       return (
         <div>
@@ -127,14 +160,12 @@ class Home extends React.Component {
               </div>
             </div>
             <div className='row d-flex'>
-              <ul className='list-group w-75 mx-auto'>
-              </ul>
+              <ul className='list-group w-75 mx-auto'></ul>
             </div>
           </div>
         </div>
       );
     }
-
   }
 }
 

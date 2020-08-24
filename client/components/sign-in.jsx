@@ -28,7 +28,7 @@ class SignIn extends React.Component {
 
   handleSignIn(token) {
     this.props.saveUserData(token.userName, token.userId);
-    this.props.setView('home');
+    this.props.setView('postHome');
   }
 
   signInData() {

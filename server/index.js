@@ -187,6 +187,22 @@ app.get('/api/grabUserPosts/:userId', async (req, res, next) => {
   }
 });
 
+app.get('/api/grabUserFeed', async (req, res, next) => {
+  try {
+    const userId = req.session.userId;
+    const { rows: posts = [] } = await db.query(`
+    SELECT * FROM "userPosts" WHERE "userId" != ${userId}`
+    );
+    res.send({
+      status: true,
+      message: `Successfully loaded user ${userId}'s feed`,
+      data: posts
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.post('/api/upload-avatar', async (req, res) => {
   try {
     if (!req.files) {

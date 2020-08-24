@@ -192,7 +192,7 @@ class Profile extends React.Component {
               <div className='col'>
                 {
                   posts.map(post => {
-                    return <img src={'http://localhost:3000/images/uploads/' + post.pictureUrl} key={post.postId} className='mw-100 mb-2'></img>;
+                    return <img src={'http://localhost:3000/images/uploads/' + post.pictureUrl} key={post.postId} className='mw-100 mb-1'></img>;
                   })
                 }
                 {/* <img src={Finger} className='mw-100 mb-2'></img> */}
