@@ -37,6 +37,10 @@
 .mw-65 {
   max-width: 60%;
 }
+.mh-65{
+  max-height: 70vh !important;
+}
+
 #footer {
   position: absolute;
   left: 0;
@@ -46,3 +50,4 @@
 #footerContainer{
     padding-bottom:60px;
 }
+
