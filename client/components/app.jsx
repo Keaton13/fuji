@@ -7,6 +7,7 @@ import Profile from './profile';
 import SignUp2 from './sign-up2';
 import Footer from './footer';
 import PostHome from './postHome';
+import Introspect from './introspect';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -25,11 +26,15 @@ export default class App extends React.Component {
       userParams: {
         userName: null,
         user_id: null
+      },
+      selectedPicture: {
+        url: null
       }
     };
     this.setView = this.setView.bind(this);
     this.saveUserData = this.saveUserData.bind(this);
     this.saveSelectedData = this.saveSelectedData.bind(this);
+    this.saveSelectedPicture = this.saveSelectedPicture.bind(this);
   }
 
   componentDidMount() {
@@ -65,7 +70,16 @@ export default class App extends React.Component {
     });
   }
 
+  saveSelectedPicture(url) {
+    this.setState({
+      selectedPicture: {
+        url: url
+      }
+    });
+  }
+
   render() {
+    // console.log(this.state.selectedPicture);
     if (this.state.isLoading) {
       return <h1>Testing Connections...</h1>;
     } else {
@@ -77,13 +91,15 @@ export default class App extends React.Component {
       } else if (this.state.view.name === 'home') {
         view = <Home setView={this.setView} userParams={this.state.userParams} saveSelectedData={this.saveSelectedData}/>;
       } else if (this.state.view.name === 'profile') {
-        view = <Profile setView={this.setView} userParams={this.state.userParams} selectedUserParams={this.state.selectedUserParams} saveSelectedData={this.saveSelectedData}/>;
+        view = <Profile setView={this.setView} userParams={this.state.userParams} saveSelectedPicture={this.saveSelectedPicture} selectedUserParams={this.state.selectedUserParams} saveSelectedData={this.saveSelectedData}/>;
       } else if (this.state.view.name === 'sign-up2') {
         view = <SignUp2 setView={this.setView} userParams={this.state.userParams}/>;
       } else if (this.state.view.name === 'select-image') {
         view = <SelectImage setView={this.setView} userParams={this.state.userParams}/>;
       } else if (this.state.view.name === 'postHome') {
-        view = <PostHome setView={this.setView}/>;
+        view = <PostHome setView={this.setView} saveSelectedPicture={this.saveSelectedPicture}/>;
+      } else if (this.state.view.name === 'introspect') {
+        view = <Introspect setView={this.setView} selectedPicture={this.state.selectedPicture}/>;
       } else {
         view = <Footer setView={this.setView} />;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './header';
 import Footer from './footer';
-import user from '../../server/public/images/search.png';
+// import user from '../../server/public/images/search.png';
 import Switch from 'react-switch';
 
 class PostHome extends React.Component {
@@ -15,6 +15,7 @@ class PostHome extends React.Component {
       buttonText: 'Explore Mode'
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleImageClick = this.handleImageClick.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +41,18 @@ class PostHome extends React.Component {
       }, 500);
     }
     // this.props.setView('home')
+  }
+
+  handleImageClick(url) {
+    if (url) {
+      try {
+        this.props.saveSelectedPicture(url);
+        this.props.setView('introspect');
+      } catch (err) {
+        console.err(err);
+      }
+    }
+
   }
 
   grabUserPosts() {
@@ -94,7 +107,7 @@ class PostHome extends React.Component {
               </div>
             </div>
             <div className='row'>
-              <div className='col mh-65 pre-scrollable'>
+              <div className='mh-65 pre-scrollable'>
                 {posts.map(post => {
                   return (
                     <img
@@ -104,6 +117,7 @@ class PostHome extends React.Component {
                       }
                       key={post.postId}
                       className='mw-100 mb-1'
+                      onClick={() => { this.handleImageClick(post.pictureUrl); }}
                     ></img>
                   );
                 })}
