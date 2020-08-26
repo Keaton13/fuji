@@ -1,33 +1,17 @@
 import React from 'react';
-import MountianOutline from '../../server/public/images/mountains-outline-png-2.png';
+import Image from '../../server/public/images/aada14b71630f9ba7c956b01398c3a1a.png';
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
   render() {
     return (
-      <div className="container">
-        <div className="row h-50">
-          <div className="col-4 center Mg1">
-            <img src={MountianOutline} className="width100"></img>
-          </div>
-          <div className="col-4 center text-center">
-            <h1>Fuji</h1>
-          </div>
-          <div className="col-4 center Mg1">
-            <img src={MountianOutline} className="width100"></img>
-          </div>
-        </div>
-        <div className="row h-100">
-          <div className="col center Mg1 borderLine">
-          </div>
-          <div className="col-4 center text-center">
-            <h6 className="Mg1">Sign-Up!</h6>
-          </div>
-          <div className="col center Mg1 borderLine">
+      <div className='container'>
+        <div className='row'>
+          <div className='col'>
+            <img src={Image} className="width100"></img>
           </div>
         </div>
       </div>

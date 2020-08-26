@@ -1,5 +1,7 @@
 import React from 'react';
-import user from '../../server/public/images/0c3b3adb1a7530892e55ef36d3be6cb8.png';
+import profileImage from '../../server/public/images/0c3b3adb1a7530892e55ef36d3be6cb8.png';
+import homeImage from '../../server/public/images/home-icon-png-home-house-icon-image-202-home-png-home-png-512_512.png';
+import createImage from '../../server/public/images/create-new--v2.png';
 
 class Footer extends React.Component {
   constructor(props) {
@@ -16,13 +18,13 @@ class Footer extends React.Component {
       <div className='container fixed-bottom'>
         <div className='row'>
           <div className='col text-center'>
-            <img src={user} className="w-50" onClick={() => this.handleSetView('select-image')}></img>
+            <img src={createImage} className="w-35 mb-2" onClick={() => this.handleSetView('select-image')}></img>
           </div>
           <div className='col text-center'>
-            <img src={user} className="w-50" onClick={() => this.handleSetView('home')}></img>
+            <img src={homeImage} className="w-35 mb-2" onClick={() => this.handleSetView('postHome')}></img>
           </div>
           <div className='col text-center'>
-            <img src={user} className="w-50" onClick={() => this.handleSetView('profile')}></img>
+            <img src={profileImage} className="w-35 mb-2" onClick={() => this.handleSetView('profile')}></img>
           </div>
         </div>
       </div>

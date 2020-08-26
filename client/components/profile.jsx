@@ -19,6 +19,7 @@ class Profile extends React.Component {
     };
     // const user = this.props.userInfo.params;
     this.setView = this.setView.bind(this);
+    this.handleImageClick = this.handleImageClick.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +30,18 @@ class Profile extends React.Component {
       const userId = this.props.userParams.user_id;
       this.grabProfileData(userId);
     }
+  }
+
+  handleImageClick(url) {
+    if (url) {
+      try {
+        this.props.saveSelectedPicture(url);
+        this.props.setView('introspect');
+      } catch (err) {
+        console.err(err);
+      }
+    }
+
   }
 
   grabUserInfo(userId) {
@@ -121,7 +134,7 @@ class Profile extends React.Component {
 
   setView() {
     this.props.saveSelectedData({});
-    this.props.setView('home');
+    this.props.setView('postHome');
   }
 
   render() {
@@ -189,16 +202,20 @@ class Profile extends React.Component {
           </div>
           <div className='container'>
             <div className='row mt-4'>
-              <div className='col'>
-                {
-                  posts.map(post => {
-                    return <img src={'http://localhost:3000/images/uploads/' + post.pictureUrl} key={post.postId} className='mw-100 mb-1'></img>;
-                  })
-                }
-                {/* <img src={Finger} className='mw-100 mb-2'></img> */}
-                {/* <img src={Finger2} className='mw-100 mb-2'></img> */}
-                {/* <img src={Finger3} className='mw-100 mb-2'></img> */}
-                {/* <img src={Finger4} className='mw-100 mb-2'></img> */}
+              <div>
+                {posts.map(post => {
+                  return (
+                    <img
+                      src={
+                        'http://localhost:3000/images/uploads/' +
+                        post.pictureUrl
+                      }
+                      key={post.postId}
+                      className='mw-100 mb-1'
+                      onClick={() => { this.handleImageClick(post.pictureUrl); }}
+                    ></img>
+                  );
+                })}
               </div>
             </div>
           </div>
