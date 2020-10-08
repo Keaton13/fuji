@@ -134,7 +134,7 @@ class Profile extends React.Component {
 
   setView() {
     this.props.saveSelectedData({});
-    if(this.props.previousView === 'profile') {
+    if (this.props.previousView === 'profile') {
       this.props.setView('profile');
     } else if (this.props.previousView === 'home') {
       this.props.setView('home');

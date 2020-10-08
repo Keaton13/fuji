@@ -22,7 +22,7 @@ class Introspect extends React.Component {
   }
 
   setView() {
-    if(this.props.previousView === 'profile') {
+    if (this.props.previousView === 'profile') {
       this.props.setView('profile');
     } else if (this.props.previousView === 'home') {
       this.props.setView('home');
@@ -38,11 +38,11 @@ class Introspect extends React.Component {
           <Header />
           <div className="row">
             <button
-                  name='button'
-                  type='button'
-                  className='btn btn-outline-primary align-center w-100'
-                  onClick={this.setView}
-                >
+              name='button'
+              type='button'
+              className='btn btn-outline-primary align-center w-100'
+              onClick={this.setView}
+            >
                   Back
             </button>
           </div>
