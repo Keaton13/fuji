@@ -96,7 +96,7 @@ export default class App extends React.Component {
       } else if (this.state.view.name === 'sign-up2') {
         view = <SignUp2 setView={this.setView} userParams={this.state.userParams}/>;
       } else if (this.state.view.name === 'select-image') {
-        view = <SelectImage setView={this.setView} userParams={this.state.userParams}/>;
+        view = <SelectImage setView={this.setView} userParams={this.state.userParams} previousView={this.state.previousView}/>;
       } else if (this.state.view.name === 'postHome') {
         view = <PostHome setView={this.setView} saveSelectedPicture={this.saveSelectedPicture}/>;
       } else if (this.state.view.name === 'introspect') {
