@@ -15,6 +15,7 @@ class SignUp extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.sendLoginData = this.sendLoginData.bind(this);
     this.handleViewChange = this.handleViewChange.bind(this);
+    this.setView = this.setView.bind(this);
   }
 
   handleInputChange(e) {
@@ -69,11 +70,25 @@ class SignUp extends React.Component {
       });
   }
 
+  setView() {
+    this.props.setView('sign-in');
+  }
+
   render() {
     return (
       <div>
         <Header/>
         <div className='container'>
+          <div className="row mt-1 mb-1">
+            <button
+              name='button'
+              type='button'
+              className='btn btn-outline-secondary align-center w-100'
+              onClick={this.setView}
+            >
+                  Back
+            </button>
+          </div>
           <form>
             <div className="form-group">
               <label htmlFor="InputName1">Name</label>
