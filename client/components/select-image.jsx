@@ -11,6 +11,7 @@ class selectImage extends React.Component {
     this.sendFile = this.sendFile.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
+    this.setView = this.setView.bind(this);
   }
 
   onChange(e) {
@@ -24,6 +25,16 @@ class selectImage extends React.Component {
     this.fileUpload(this.state.file).then(response => {
       // console.log(response.data);
     });
+  }
+
+  setView() {
+    if (this.props.previousView === 'profile') {
+      this.props.setView('profile');
+    } else if (this.props.previousView === 'home') {
+      this.props.setView('home');
+    } else {
+      this.props.setView('postHome');
+    }
   }
 
   sendFile(file) {
@@ -54,6 +65,16 @@ class selectImage extends React.Component {
       <div>
         <Header />
         <div className='container'>
+          <div className='row mb-3'>
+            <button
+              name='button'
+              type='button'
+              className='btn btn-outline-secondary align-center w-100'
+              onClick={this.setView}
+            >
+              Back
+            </button>
+          </div>
           <div className='row'>
             <img src={this.state.file} className="img-fluid"></img>
           </div>
