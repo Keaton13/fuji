@@ -144,7 +144,7 @@ app.get('/api/users', async (req, res, next) => {
     //   throw new ClientError('Not authorized', 401);
     // }
 
-    const { rows: products = [] } = await db.query('SELECT * FROM "users"');
+    const { rows: products = [] } = await db.query(`SELECT * FROM "users" WHERE "user_id" != ${req.session.userId}`);
 
     res.send(products);
   } catch (error) {
