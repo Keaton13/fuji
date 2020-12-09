@@ -1,5 +1,6 @@
 import React from 'react';
-import Header from './header';
+import ReactRoundedImage from 'react-rounded-image';
+import Footer from './footer';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -15,11 +16,15 @@ class Profile extends React.Component {
       },
       posts: {
         urls: null
+      },
+      display: {
+        current: 'show'
       }
     };
     // const user = this.props.userInfo.params;
     this.setView = this.setView.bind(this);
     this.handleImageClick = this.handleImageClick.bind(this);
+    this.changeSVGDisplay = this.changeSVGDisplay.bind(this);
   }
 
   componentDidMount() {
@@ -143,72 +148,107 @@ class Profile extends React.Component {
     }
   }
 
+  showSVGDisplay() {
+    this.setState({
+      display: {
+        current: 'show'
+      }
+    });
+  }
+
+  changeSVGDisplay() {
+    this.setState({
+      display: {
+        current: 'hidden'
+      }
+    });
+  }
+
   render() {
     const user = this.state.user;
     const profileData = this.state.profileData.data;
     const posts = this.state.posts.urls;
-
+    let customClass = null;
+    if (this.state.display.current === 'hidden') {
+      customClass = 'animation2';
+    } else {
+      customClass = 'animation';
+    }
     if (profileData !== null && user.name !== null && posts !== null) {
-      const url =
-        window.location.origin +
-        '/images/uploads/users/' +
-        profileData.profilepicurl;
+      // const url =
+      //   window.location.origin +
+      //   '/images/uploads/users/' +
+      //   profileData.profilepicurl;
       return (
         <div>
-          <Header />
-          <div className='contianer borderLineBot'>
-            <div className='row h-100'>
-              <div className='col-4 pr-0'>
-                <img src={url} className='mw-100 ml-1 mr-1'></img>
-              </div>
-              <div className='col-8 text-center pl-0'>
-                <div className='row ml-2'>
-                  <div className='col'>
-                    <h6 className='mb-1'>{user.name}</h6>
-                    <h6>{'@' + user.username}</h6>
-                  </div>
-                  <div className='col'>
-                    <h6 className='mb-1'>{profileData.numberofposts}</h6>
-                    <h6>Replys</h6>
-                  </div>
-                  <div className='col'>
-                    <h6 className='mb-1'>{profileData.saved}</h6>
-                    <h6>Posts</h6>
-                  </div>
+          <div>
+            <svg className={'profileFeedPosition ' + customClass} xmlns="http://www.w3.org/2000/svg" width="375" height="322">
+              <defs>
+                <linearGradient x2='0%' y2='100%' id='bgGradient' >
+                  <stop offset='0%' stopColor='#FFFFFF' />
+                  <stop offset='25%' stopColor='#FFFFFF' />
+                  <stop offset='100%' stopColor='#FFFFFF00' />
+                </linearGradient>
+              </defs>
+              <g>
+                <path opacity="1" fill="#FFFFFF" d="M0 0h375v209.712c0 23.625-7.706 46.606-21.949 65.455-38.718 51.241-111.676 61.326-162.843 22.509l-25.903-19.651a45.321 45.321 0 00-51.524-2.255l-10.151 6.386C64.793 305.959 14.65 288.352 0 246.119V0z">
+                </path>
+              </g>
+            </svg>
+          </div>
+          <h1 className="text-center fuji-Font">fuji</h1>
+          <div className='contianer overflow-hidden'>
+            <div className="row">
+              <div className="col-6 pr-0">
+                <div className="col circleBase type2 text-center float-left MgL-1">
+                  <h2 className="Mg2" style={{ color: '#CDCDCD' }}>+</h2>
                 </div>
-                <div className='row ml-2'>
-                  <p className='ml-3'>{profileData.description}</p>
+              </div>
+              <div className="col-6">
+                <div className="row Mg3">
+                  <h6 className='mb-1 float-left width100 profileText'>{user.name}</h6>
+                  <h6 className="width100 font-sizeData">{'@' + user.username}</h6>
+                </div>
+                <div className="row mt-1 mr-1 float-right">
+                  <button
+                    name='button'
+                    type='button'
+                    className='align-center widthProfileButton buttonBorderRadius buttonFont'
+                    onClick={this.signInData}
+                  >
+                    Follow!
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
-          <div className='container'>
-            <div className='row mt-4'>
-              <div className='col-3 pr-0'>
+            <div className="row">
+              <div className="col-6 Mg4">
+                <div className='col-sm width25 float-right padding-0 text-center font-sizeStats'>
+                  <h6 className='mb-1 font-sizeNumber'>{profileData.numberofposts}</h6>
+                  <p className="font-sizeStats">homies</p>
+                </div>
+                <div className='col-sm width25 float-right padding-0 text-center font-sizeStats mr-2'>
+                  <h6 className='mb-1 font-sizeNumber'>{profileData.saved}</h6>
+                  <p className="font-sizeStats">photos</p>
+                </div>
+                <div className='col-sm width25 float-right padding-0 text-center font-sizeStats mr-2'>
+                  <h6 className='mb-1 font-sizeNumber'>{profileData.saved}</h6>
+                  <p className="font-sizeStats">comments</p>
+                </div>
+              </div>
+              <div className="col-6">
                 <button
                   name='button'
                   type='button'
-                  className='btn btn-outline-secondary align-center w-75'
+                  className='align-center ml-3 widthProfileButton buttonBorderRadius buttonFont'
                   onClick={this.setView}
                 >
-                  Back
-                </button>
-              </div>
-              <div className='col-9 pl-0'>
-                <button
-                  name='button'
-                  type='button'
-                  className='btn btn-outline-primary align-center w-75'
-                  onClick={this.signInData}
-                >
-                  Follow!
+                  Message
                 </button>
               </div>
             </div>
-          </div>
-          <div className='container'>
-            <div className='row mt-4'>
-              <div>
+            <div className='row' onTouchStart={this.changeSVGDisplay}>
+              <div className="pre-scrollable mh-prescroll">
                 {posts.map(post => {
                   return (
                     <img
@@ -225,6 +265,15 @@ class Profile extends React.Component {
               </div>
             </div>
           </div>
+          <button
+            name='button'
+            type='button'
+            className={'align-center widthProfileButton buttonBorderRadius buttonFont blockButtonPosition ' + customClass}
+            onClick={this.setView}
+          >
+            Block
+          </button>
+          <Footer setView={this.props.setView}/>
         </div>
       );
     } else {

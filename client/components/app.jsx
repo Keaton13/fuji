@@ -8,6 +8,7 @@ import SignUp2 from './sign-up2';
 import Footer from './footer';
 import PostHome from './postHome';
 import Introspect from './introspect';
+import Canvas from './canvas';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -29,7 +30,8 @@ export default class App extends React.Component {
         user_id: null
       },
       selectedPicture: {
-        url: null
+        url: null,
+        postId: null
       }
     };
     this.setView = this.setView.bind(this);
@@ -72,10 +74,11 @@ export default class App extends React.Component {
     });
   }
 
-  saveSelectedPicture(url) {
+  saveSelectedPicture(url, postId) {
     this.setState({
       selectedPicture: {
-        url: url
+        url: url,
+        postId: postId
       }
     });
   }
@@ -101,6 +104,8 @@ export default class App extends React.Component {
         view = <PostHome setView={this.setView} saveSelectedPicture={this.saveSelectedPicture}/>;
       } else if (this.state.view.name === 'introspect') {
         view = <Introspect setView={this.setView} selectedPicture={this.state.selectedPicture} previousView={this.state.previousView}/>;
+      } else if (this.state.view.name === 'canvas') {
+        view = <Canvas userParams={this.state.userParams} setView={this.setView} selectedPicture={this.state.selectedPicture}/>;
       } else {
         view = <Footer setView={this.setView} />;
 

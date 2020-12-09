@@ -22,12 +22,12 @@ app.use(fileUpload({
 
 // add other middleware
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: '10mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(morgan('dev'));
 app.use(staticMiddleware);
 app.use(sessionMiddleware);
-app.use(express.json());
+// app.use(express.json());
 
 app.get('/api/health-check', (req, res, next) => {
   db.query('select \'successfully connected\' as "message"')
@@ -191,7 +191,7 @@ app.get('/api/grabUserFeed', async (req, res, next) => {
   try {
     const userId = req.session.userId;
     const { rows: posts = [] } = await db.query(`
-    SELECT * FROM "userPosts" WHERE "userId" != ${userId}`
+    SELECT * FROM "userPosts" WHERE "userId" != ${userId} ORDER BY "createdAt" DESC`
     );
     res.send({
       status: true,
@@ -308,6 +308,55 @@ app.post('/api/upload-data', async (req, res) => {
     }
   } catch (err) {
     res.status(500).send(err);
+  }
+});
+
+app.post('/api/upload-comment-data', async (req, res) => {
+  try {
+    try {
+      const commentData = req.body.commentData;
+      const stageData = req.body.stageData;
+      const postId = req.body.postId;
+      const user_id = req.body.userId;
+
+      // console.log(commentData)
+      // console.log(stageData)
+      const { rows: [newComment] } = await db.query(`
+          INSERT INTO "comments"
+          ("postId", "user_id", "commentPicUrl", "commentEditString")
+          VALUES ($1, $2, $3, $4)
+          returning "user_id"`,
+      [postId, user_id, commentData, stageData]
+      );
+      res.status(200).send({
+        message: 'Data has been sent successfully!',
+        status: 200
+      });
+    } catch (error) {
+      if (error.code === '23505') {
+        throw new ClientError('email already in use', 422);
+      }
+      throw new ClientError('error saving user', error);
+    }
+
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.get('/api/grabPostComments/:commentId', async (req, res, next) => {
+  try {
+    const commentId = req.params.commentId;
+    const { rows: comments = [] } = await db.query(`
+    SELECT * FROM "comments" WHERE "postId" = ${commentId}`
+    );
+    res.send({
+      status: true,
+      message: `Successfully loaded user's commentId ${commentId}`,
+      data: comments
+    });
+  } catch (error) {
+    next(error);
   }
 });
 

@@ -1,12 +1,57 @@
+
 .logo {
   background-image: url(/images/mountains-outline-png-2.png);
   background-color: #cccccc;
 }
+.minWidth1 {
+  min-width: 5rem !important;
+}
+.minWidth100 {
+  min-width: 100%;
+}
 .width100 {
   width: 100%;
 }
+.width50 {
+  width: 50%;
+}
+.width40 {
+  width: 40%;
+}
+.width10 {
+  width: 10%;
+}
+.width20 {
+  width: 20%;
+}
+.width25 {
+  width: 25% !important;
+}
+.widthProfileButton {
+  width: 10rem;
+  width: 8rem;
+  height: 2rem;
+}
+.height50 {
+  height: 50%;
+}
+.height100{
+  height: 100%;
+}
+.Mg4 {
+  margin-top: 3%;
+}
 .Mg1 {
   margin-top: 5%;
+}
+.Mg3 {
+  margin-top: 15%;
+}
+.Mg2 {
+  margin-top: 45%;
+}
+.MgL-1 {
+  margin-left: 10%;
 }
 .line {
   position: absolute;
@@ -37,6 +82,23 @@
 .mw-65 {
   max-width: 60%;
 }
+.mw-imagePicker {
+  max-width: 150px;
+}
+.mh-imagePicker {
+  max-height: 100px
+}
+.mh-selectImage {
+  max-height: 350px;
+  margin: auto;
+}
+.mh-prescroll {
+  max-height: 470px !important;
+
+}
+.mw-25 {
+  max-width: 25px;
+}
 .mh-65{
   max-height: 70vh !important;
 }
@@ -58,6 +120,116 @@ html, body {
   height: 100%
 }
 .padding-0 {
-  padding-left: 0px;
-  padding-right: 0px;
+  padding: 0 !important;
+}
+.img-div {
+  width: 100%;
+}
+.productSlider {
+  width: 100%;
+  margin: 0 auto;
+}
+  .slick-next { right: 25px; }
+  .slick-prev { left: 25px; }
+  .slick-slide {
+    padding: 0px 0px;
+  }
+.margin-auto {
+  margin: auto;
+}
+/*Circe classes */
+.circleBase {
+  border-radius: 50%;
+}
+.type2 {
+  width: 133px !important;
+  height: 133px !important;
+  background: #ECECEC;
+  border: 3px solid #000 !;
+  border: 2px solid #BABABA;
+box-sizing: border-box;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.font-sizeStats {
+font-style: normal;
+font-weight: bold;
+font-size: 10px;
+line-height: 21px;
+text-align: center;
+}
+.font-sizeNumber {
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+  font-style: normal;
+font-weight: bold;
+}
+.font-sizeData {
+  font-size: .75rem !important;
+}
+.fuji-Font {
+  font-family: 'UnifrakturCook';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+
+}
+.z-Index2 {
+  z-index: 2;
+}
+.profileFeedPosition {
+  position: absolute !important ;
+  top: 57px !important ;
+}
+.blockButtonPosition {
+  position: absolute;
+  top: 31%;
+  right: 15%;
+}
+.profileText {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 22px;
+}
+.gradient {
+  background: linear-gradient(179.92deg, #FFFFFF 58.32%, rgba(255, 255, 255, 0) 99.93%) !important;
+}
+.buttonBorderRadius {
+  background: #E4E4E4;
+  border: 1.5px solid #AFAFAF;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 28px;
+}
+
+.buttonFont{
+  font-family: "Ubuntu"ww;
+font-style: normal;
+font-weight: 500;
+font-size: 13px;
+line-height: 15px;
+letter-spacing: 0.04em;
+text-transform: uppercase;
+color: #535353;
+}
+/*M 0 0 Q 50 100 150 150 Q 300 200 400 100 Q 500 50 550 150 C 700 300 750 100 800 0 */
+.wave-container {
+  position: relative;
+  background: #09F;
+  color: #FFF;
+  text-align: center;
+  overflow: hidden;
+}
+.animation {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.8s, opacity 0.5s linear;
+}
+.animation2 {
+  visibility: hidden;
+  /* z-index: 2; */
+  opacity: 0;
+  transition: visibility 0.8s, opacity 0.5s linear;
 }
