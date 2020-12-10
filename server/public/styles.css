@@ -233,3 +233,6 @@ color: #535353;
   opacity: 0;
   transition: visibility 0.8s, opacity 0.5s linear;
 }
+html, body, #root, .App {
+  height: 100%;
+}

@@ -32,12 +32,16 @@ export default class App extends React.Component {
       selectedPicture: {
         url: null,
         postId: null
+      },
+      selectedPictureHeight: {
+        height: null
       }
     };
     this.setView = this.setView.bind(this);
     this.saveUserData = this.saveUserData.bind(this);
     this.saveSelectedData = this.saveSelectedData.bind(this);
     this.saveSelectedPicture = this.saveSelectedPicture.bind(this);
+    this.saveSelectedPictureHeight = this.saveSelectedPictureHeight.bind(this);
   }
 
   componentDidMount() {
@@ -83,6 +87,14 @@ export default class App extends React.Component {
     });
   }
 
+  saveSelectedPictureHeight(height) {
+    this.setState({
+      selectedPictureHeight: {
+        height: height
+      }
+    });
+  }
+
   render() {
     if (this.state.isLoading) {
       return <h1>Testing Connections...</h1>;
@@ -103,16 +115,16 @@ export default class App extends React.Component {
       } else if (this.state.view.name === 'postHome') {
         view = <PostHome setView={this.setView} saveSelectedPicture={this.saveSelectedPicture}/>;
       } else if (this.state.view.name === 'introspect') {
-        view = <Introspect setView={this.setView} selectedPicture={this.state.selectedPicture} previousView={this.state.previousView}/>;
+        view = <Introspect saveSelectedPictureHeight={this.saveSelectedPictureHeight} setView={this.setView} selectedPicture={this.state.selectedPicture} previousView={this.state.previousView}/>;
       } else if (this.state.view.name === 'canvas') {
-        view = <Canvas userParams={this.state.userParams} setView={this.setView} selectedPicture={this.state.selectedPicture}/>;
+        view = <Canvas userParams={this.state.userParams} setView={this.setView} selectedPicture={this.state.selectedPicture} selectedPictureHeight={this.state.selectedPictureHeight}/>;
       } else {
         view = <Footer setView={this.setView} />;
 
       }
 
       return (
-        <div>
+        <div className="h-100">
           { view }
         </div>
       );

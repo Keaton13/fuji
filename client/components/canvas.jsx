@@ -181,155 +181,160 @@ const Canvas = props => {
   };
 
   return (
-    <div>
-      <Header />
-      <div>
-        {imageDisplay === 'false' ? <ImagePicker dragUrl={dragUrl} setImageClick={setImageClick} userParams={props.userParams} saveImgSize={saveImgSize} /> : null}
+    <div className="container h-100">
+      <div className="row">
+        <Header />
       </div>
-      <div
-        onTouchEnd={e => {
-          // register event position
-          stageRef.current.setPointersPositions(e);
-          // add image
-          if (imageClick !== 1) {
+      {/* <div>
+        {imageDisplay === 'false' ? <ImagePicker dragUrl={dragUrl} setImageClick={setImageClick} userParams={props.userParams} saveImgSize={saveImgSize} /> : null}
+      </div> */}
+      <div className="row h-75">
+        <div
+          className="col my-auto padding-0"
+          onTouchEnd={e => {
+            // register event position
+            stageRef.current.setPointersPositions(e);
+            // add image
+            if (imageClick !== 1) {
+              setImages(
+                images.concat([
+                  {
+                    ...stageRef.current.getPointerPosition(),
+                    src: dragUrl.current,
+                    width: 250,
+                    height: 141
+                  }
+                ])
+              );
+              setImageClick(1);
+            }
+            setImageClick(1);
+          }}
+          onDrop={e => {
+            // register event position
+            stageRef.current.setPointersPositions(e);
+            // add image
             setImages(
               images.concat([
                 {
                   ...stageRef.current.getPointerPosition(),
                   src: dragUrl.current,
-                  width: 250,
-                  height: 141
+                  ref: image => {
+                    handleSize(image);
+                  }
                 }
               ])
             );
-            setImageClick(1);
-          }
-          setImageClick(1);
-        }}
-        onDrop={e => {
-          // register event position
-          stageRef.current.setPointersPositions(e);
-          // add image
-          setImages(
-            images.concat([
-              {
-                ...stageRef.current.getPointerPosition(),
-                src: dragUrl.current,
-                ref: image => {
-                  handleSize(image);
-                }
-              }
-            ])
-          );
-        }}
-        onDragOver={e => e.preventDefault()}
-      >
-        <Stage
-          width={window.innerWidth}
-          height={window.innerHeight - 125}
-          onMouseDown={checkDeselect}
-          onMousemove={handleMouseMove}
-          onMouseup={handleMouseUp}
-          onTouchStart={checkDeselect}
-          onTouchMove={handleMouseMove}
-          onTouchEnd={handleMouseUp}
-          ref={stageRef}
+          }}
+          onDragOver={e => e.preventDefault()}
         >
-          <Layer>
-            <Portal>
-              <div style={{
-                position: 'absolute',
-                left: '23%',
-                top: '30%'
-              }}>
-                {colorDisplay === 'false' ? <SketchPicker color={color} onChangeComplete={handleChangeComplete} /> : null}
-              </div>
-              <div style={{
-                position: 'absolute',
-                left: '90%',
-                top: '30%'
-              }}>
-                <div className="btn-group-vertical">
-                  <button type="button" className="btn btn-secondary" onClick={setImageDisplayFunction}>+</button>
-                  <button type="button" className="btn btn-secondary" onClick={setTextDisplayFunction}>T</button>
-                  <button type="button" className="btn btn-secondary" onClick={setBrushTypeFunction}><img src={icons} className="width100"></img></button>
-                  <button type="button" className="btn btn-secondary" onClick={setColorPickerFunction}><img src="http://localhost:3000/images/ColorWheel.png" className="width100"></img></button>
-                  <div className="btn-group dropleft width25" role="group">
-                    <button id="btnGroupDrop1" type="button" className="btn btn-secondary dropdown-toggle pull-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <Stage
+            width={375}
+            height={props.selectedPictureHeight.height}
+            onMouseDown={checkDeselect}
+            onMousemove={handleMouseMove}
+            onMouseup={handleMouseUp}
+            onTouchStart={checkDeselect}
+            onTouchMove={handleMouseMove}
+            onTouchEnd={handleMouseUp}
+            ref={stageRef}
+          >
+            <Layer>
+              <Portal>
+                <div style={{
+                  position: 'absolute',
+                  left: '23%',
+                  top: '30%'
+                }}>
+                  {colorDisplay === 'false' ? <SketchPicker color={color} onChangeComplete={handleChangeComplete} /> : null}
+                </div>
+                <div style={{
+                  position: 'absolute',
+                  left: '90%',
+                  top: '30%'
+                }}>
+                  <div className="btn-group-vertical">
+                    <button type="button" className="btn btn-secondary" onClick={setImageDisplayFunction}>+</button>
+                    <button type="button" className="btn btn-secondary" onClick={setTextDisplayFunction}>T</button>
+                    <button type="button" className="btn btn-secondary" onClick={setBrushTypeFunction}><img src={icons} className="width100"></img></button>
+                    <button type="button" className="btn btn-secondary" onClick={setColorPickerFunction}><img src="http://localhost:3000/images/ColorWheel.png" className="width100"></img></button>
+                    <div className="btn-group dropleft width25" role="group">
+                      <button id="btnGroupDrop1" type="button" className="btn btn-secondary dropdown-toggle pull-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                    </button>
-                    <div className="dropdown-menu text-center minWidth1" aria-labelledby="btnGroupDrop1">
-                      <a className="dropdown-item" href="#" onClick={loadStage}>Load</a>
-                      <a className="dropdown-item" href="#" onClick={saveStage}>Save</a>
-                      <a className="dropdown-item" href="#" onClick={undoDrawing}>Undo</a>
-                      <a className="dropdown-item" href="#" onClick={redoDrawing}>Redo</a>
+                      </button>
+                      <div className="dropdown-menu text-center minWidth1" aria-labelledby="btnGroupDrop1">
+                        <a className="dropdown-item" href="#" onClick={loadStage}>Load</a>
+                        <a className="dropdown-item" href="#" onClick={saveStage}>Save</a>
+                        <a className="dropdown-item" href="#" onClick={undoDrawing}>Undo</a>
+                        <a className="dropdown-item" href="#" onClick={redoDrawing}>Redo</a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div style={{
-                position: 'absolute',
-                left: '15%',
-                top: '35%'
-              }}>
-                {inputDisplay === 'false' ? <TextInput currentText={currentText} setCurrentText={setCurrentText} saveText={saveText} /> : null}
-              </div>
-            </Portal>
-            <Text text="Just start drawing" x={125} y={225} draggable={true} fontSize={20} />
-            {lines.map((line, i) => (
-              <Line
-                key={i}
-                points={line.points}
-                stroke={line.color}
-                strokeWidth={5}
-                tension={0.5}
-                lineCap="round"
-                globalCompositeOperation={
-                  line.tool === 'eraser' ? 'destination-out' : 'source-over'
-                }
-              />
-            ))}
-            {texts.map((text, i) => (
-              <Texts
-                key={i}
-                color={text.color}
-                text={text}
-                // x={text.x}
-                // y={text.y}
-                draggable={true}
-                textProps={text}
-                isSelected={text.id === selectedId2}
-                onSelect={() => {
-                  selectText(text.id);
-                }}
-                onChange={newAttrs => {
-                  const texts2 = texts.slice();
-                  texts2[i] = newAttrs;
-                  setTexts(texts2);
-                }}
-              />
-            ))}
-          </Layer>
-          <Layer>
-            {images.map((image, i) => {
-              return <URLImages
-                key={i}
-                image={image}
-                draggable={true}
-                imageProps={image}
-                isSelected={image.id === selectedId3}
-                onSelect={() => {
-                  selectImage(image.id);
-                }}
-                onChange={newAttrs => {
-                  const images2 = images.slice();
-                  images2[i] = newAttrs;
-                  setImages(images2);
-                }}
-              />;
-            })}
-          </Layer>
-        </Stage>
+                <div style={{
+                  position: 'absolute',
+                  left: '15%',
+                  top: '35%'
+                }}>
+                  {inputDisplay === 'false' ? <TextInput currentText={currentText} setCurrentText={setCurrentText} saveText={saveText} /> : null}
+                </div>
+              </Portal>
+              <Text text="Just start drawing" x={125} y={225} draggable={true} fontSize={20} />
+              {lines.map((line, i) => (
+                <Line
+                  key={i}
+                  points={line.points}
+                  stroke={line.color}
+                  strokeWidth={5}
+                  tension={0.5}
+                  lineCap="round"
+                  globalCompositeOperation={
+                    line.tool === 'eraser' ? 'destination-out' : 'source-over'
+                  }
+                />
+              ))}
+              {texts.map((text, i) => (
+                <Texts
+                  key={i}
+                  color={text.color}
+                  text={text}
+                  // x={text.x}
+                  // y={text.y}
+                  draggable={true}
+                  textProps={text}
+                  isSelected={text.id === selectedId2}
+                  onSelect={() => {
+                    selectText(text.id);
+                  }}
+                  onChange={newAttrs => {
+                    const texts2 = texts.slice();
+                    texts2[i] = newAttrs;
+                    setTexts(texts2);
+                  }}
+                />
+              ))}
+            </Layer>
+            <Layer>
+              {images.map((image, i) => {
+                return <URLImages
+                  key={i}
+                  image={image}
+                  draggable={true}
+                  imageProps={image}
+                  isSelected={image.id === selectedId3}
+                  onSelect={() => {
+                    selectImage(image.id);
+                  }}
+                  onChange={newAttrs => {
+                    const images2 = images.slice();
+                    images2[i] = newAttrs;
+                    setImages(images2);
+                  }}
+                />;
+              })}
+            </Layer>
+          </Stage>
+        </div>
         <Footer setView={props.setView} />
       </div>
     </div>
