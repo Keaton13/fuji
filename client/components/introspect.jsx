@@ -9,9 +9,14 @@ class Introspect extends React.Component {
       img: {
         url: null,
         postId: null
+      },
+      dimensions: {
+        height: null
       }
     };
     this.setView = this.setView.bind(this);
+    this.imgLoad = this.imgLoad.bind(this);
+    this.handleViewChange = this.handleViewChange.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +42,17 @@ class Introspect extends React.Component {
     }
   }
 
+  imgLoad({ target: img }) {
+    this.setState({
+      dimensions: { height: img.offsetHeight }
+    });
+  }
+
+  handleViewChange() {
+    this.props.saveSelectedPictureHeight(this.state.dimensions.height);
+    this.setView('canvas');
+  }
+
   render() {
     return (
       <div>
@@ -56,11 +72,10 @@ class Introspect extends React.Component {
             <img
               src={'http://localhost:3000/images/uploads/' + this.state.img.url}
               className='img-fluid'
+              onLoad={this.imgLoad}
             ></img>
             <div className="col">
-              <button className="btn btn-outline-primary" onClick={() => {
-                this.setView('canvas');
-              }}>Comment</button>
+              <button className="btn btn-outline-primary" onClick={this.handleViewChange}>Comment</button>
             </div>
           </div>
           <Footer setView={this.props.setView} />
