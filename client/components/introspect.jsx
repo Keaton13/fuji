@@ -7,7 +7,8 @@ class Introspect extends React.Component {
     super(props);
     this.state = {
       img: {
-        url: null
+        url: null,
+        postId: null
       }
     };
     this.setView = this.setView.bind(this);
@@ -16,18 +17,23 @@ class Introspect extends React.Component {
   componentDidMount() {
     this.setState({
       img: {
-        url: this.props.selectedPicture.url
+        url: this.props.selectedPicture.url,
+        postId: this.props.selectedPicture.postId
       }
     });
   }
 
-  setView() {
-    if (this.props.previousView === 'profile') {
-      this.props.setView('profile');
-    } else if (this.props.previousView === 'home') {
-      this.props.setView('home');
+  setView(text) {
+    if (text === 'canvas') {
+      this.props.setView('canvas');
     } else {
-      this.props.setView('postHome');
+      if (this.props.previousView === 'profile') {
+        this.props.setView('profile');
+      } else if (this.props.previousView === 'home') {
+        this.props.setView('home');
+      } else {
+        this.props.setView('postHome');
+      }
     }
   }
 
@@ -43,16 +49,21 @@ class Introspect extends React.Component {
               className='btn btn-outline-primary align-center w-100'
               onClick={this.setView}
             >
-                  Back
+              Back
             </button>
           </div>
-          <div className='row h-75 align-items-center'>
+          <div className='row h-75 align-items-center text-center'>
             <img
               src={'http://localhost:3000/images/uploads/' + this.state.img.url}
               className='img-fluid'
             ></img>
+            <div className="col">
+              <button className="btn btn-outline-primary" onClick={() => {
+                this.setView('canvas');
+              }}>Comment</button>
+            </div>
           </div>
-          <Footer setView={this.props.setView}/>
+          <Footer setView={this.props.setView} />
         </div>
       </div>
     );

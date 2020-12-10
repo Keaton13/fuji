@@ -76,7 +76,7 @@ class selectImage extends React.Component {
             </button>
           </div>
           <div className='row'>
-            <img src={this.state.file} className="img-fluid"></img>
+            <img src={this.state.file} className="img-fluid mh-selectImag"></img>
           </div>
 
           <form encType="multipart/form-data" action="">
