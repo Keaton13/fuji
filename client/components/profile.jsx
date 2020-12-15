@@ -1,6 +1,7 @@
 import React from 'react';
-import ReactRoundedImage from 'react-rounded-image';
 import Footer from './footer';
+import AvatarEditor from 'react-avatar-editor';
+import AvatarEditorPopup from './avatarEditorPopup';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -19,12 +20,17 @@ class Profile extends React.Component {
       },
       display: {
         current: 'show'
-      }
-    };
+      },
+      preview: null
+    }
     // const user = this.props.userInfo.params;
     this.setView = this.setView.bind(this);
     this.handleImageClick = this.handleImageClick.bind(this);
-    this.changeSVGDisplay = this.changeSVGDisplay.bind(this);
+    this.grabProfileData = this.grabProfileData.bind(this);
+    this.grabUserPosts = this.grabUserPosts.bind(this);
+    this.grabUserInfo = this.grabUserInfo.bind(this);
+    this.showSVGDisplay = this.showSVGDisplay.bind(this);
+    this.handleImageSave = this.handleImageSave.bind(this);
   }
 
   componentDidMount() {
@@ -164,7 +170,21 @@ class Profile extends React.Component {
     });
   }
 
+
+  handleImageSave(img) {
+    this.setState = ({
+      preview: {
+        img
+      }
+    })
+  }
+
+  setEditorRef(editor){
+    this.editor = editor
+  }
+
   render() {
+    console.log(this.state.preview)
     const user = this.state.user;
     const profileData = this.state.profileData.data;
     const posts = this.state.posts.urls;
@@ -175,10 +195,10 @@ class Profile extends React.Component {
       customClass = 'animation';
     }
     if (profileData !== null && user.name !== null && posts !== null) {
-      // const url =
-      //   window.location.origin +
-      //   '/images/uploads/users/' +
-      //   profileData.profilepicurl;
+      const url =
+        window.location.origin +
+        '/images/uploads/users/' +
+        profileData.profilepicurl;
       return (
         <div>
           <div>
@@ -200,8 +220,9 @@ class Profile extends React.Component {
           <div className='contianer overflow-hidden'>
             <div className="row">
               <div className="col-6 pr-0">
-                <div className="col circleBase type2 text-center float-left MgL-1">
-                  <h2 className="Mg2" style={{ color: '#CDCDCD' }}>+</h2>
+                <div className="col circleBase type2 text-center float-left MgL-1" data-toggle="modal" data-target="#exampleModal">
+                  {/* <h2 className="Mg2" style={{ color: '#CDCDCD' }}>+</h2> */}
+                  {!!this.state.preview && <img src={this.state.preview.img} />}
                 </div>
               </div>
               <div className="col-6">
@@ -247,7 +268,7 @@ class Profile extends React.Component {
                 </button>
               </div>
             </div>
-            <div className='row' onTouchStart={this.changeSVGDisplay}>
+            <div className='row' onTouchStart={this.changeSVGDisplay.bind(this)}>
               <div className="pre-scrollable mh-prescroll">
                 {posts.map(post => {
                   return (
@@ -265,6 +286,9 @@ class Profile extends React.Component {
               </div>
             </div>
           </div>
+          <div className="row">
+            <AvatarEditorPopup handleImageSave={this.handleImageSave} profileData={this.state.profileData.data}/>
+          </div>
           <button
             name='button'
             type='button'
@@ -273,7 +297,7 @@ class Profile extends React.Component {
           >
             Block
           </button>
-          <Footer setView={this.props.setView}/>
+          <Footer setView={this.props.setView} />
         </div>
       );
     } else {

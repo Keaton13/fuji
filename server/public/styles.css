@@ -53,6 +53,9 @@
 .MgL-1 {
   margin-left: 10%;
 }
+.MgL-23{
+  margin-left: 23%;
+}
 .line {
   position: absolute;
   left: 0%;
@@ -149,6 +152,30 @@ html, body {
   border: 2px solid #BABABA;
 box-sizing: border-box;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.modalContentCustom {
+  background: #C4C4C4 !important;
+  border-radius: 2rem !important;
+  width: 63% !important;
+}
+.modalNoBorder {
+  border-bottom: 0px !important;
+  border-top: 0px !important;
+}
+.modalButton {
+  width: 100% !important;
+  background-color: #6c6c6c !important;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.modalHeader {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: normal !important;
+  font-size: 13px !important;
+  color: #868686;
+}
+.modalFooter {
+  width: 87% !important;
 }
 
 .font-sizeStats {
