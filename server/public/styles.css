@@ -47,6 +47,9 @@
 .Mg3 {
   margin-top: 15%;
 }
+.MgCustomProfilePic {
+  margin-top: 37%;
+}
 .Mg2 {
   margin-top: 45%;
 }
@@ -96,7 +99,7 @@
   margin: auto;
 }
 .mh-prescroll {
-  max-height: 470px !important;
+  max-height: 530px !important;
 
 }
 .mw-25 {
@@ -262,4 +265,12 @@ color: #535353;
 }
 html, body, #root, .App {
   height: 100%;
+}
+.profileImage {
+  border-radius: 50%;
+  width: 133px;
+  height: 133px;
+}
+#addImageContainer{
+  height: 10rem;
 }

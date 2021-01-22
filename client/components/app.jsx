@@ -111,15 +111,15 @@ export default class App extends React.Component {
       } else if (this.state.view.name === 'sign-up2') {
         view = <SignUp2 setView={this.setView} userParams={this.state.userParams}/>;
       } else if (this.state.view.name === 'select-image') {
-        view = <SelectImage setView={this.setView} userParams={this.state.userParams} previousView={this.state.previousView}/>;
+        view = <SelectImage setView={this.setView} userParams={this.state.userParams} previousView={this.state.previousView} saveSelectedData={this.saveSelectedData}/>;
       } else if (this.state.view.name === 'postHome') {
-        view = <PostHome setView={this.setView} saveSelectedPicture={this.saveSelectedPicture}/>;
+        view = <PostHome setView={this.setView} saveSelectedPicture={this.saveSelectedPicture} saveSelectedData={this.saveSelectedData}/>;
       } else if (this.state.view.name === 'introspect') {
         view = <Introspect saveSelectedPictureHeight={this.saveSelectedPictureHeight} setView={this.setView} selectedPicture={this.state.selectedPicture} previousView={this.state.previousView}/>;
       } else if (this.state.view.name === 'canvas') {
         view = <Canvas userParams={this.state.userParams} setView={this.setView} selectedPicture={this.state.selectedPicture} selectedPictureHeight={this.state.selectedPictureHeight}/>;
       } else {
-        view = <Footer setView={this.setView} />;
+        view = <Footer setView={this.setView} saveSelectedData={this.saveSelectedData}/>;
 
       }
 

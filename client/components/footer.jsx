@@ -7,10 +7,16 @@ class Footer extends React.Component {
   constructor(props) {
     super(props);
     this.handleSetView = this.handleSetView.bind(this);
+    this.resetSelectedUserParams = this.resetSelectedUserParams.bind(this);
   }
 
   handleSetView(page) {
     this.props.setView(page);
+  }
+
+  resetSelectedUserParams() {
+    this.props.saveSelectedData({});
+    this.handleSetView('profile');
   }
 
   render() {
@@ -24,7 +30,7 @@ class Footer extends React.Component {
             <img src={homeImage} className="w-35 mb-2" onClick={() => this.handleSetView('postHome')}></img>
           </div>
           <div className='col text-center'>
-            <img src={profileImage} className="w-35 mb-2" onClick={() => this.handleSetView('profile')}></img>
+            <img src={profileImage} className="w-35 mb-2" onClick={() => this.resetSelectedUserParams()}></img>
           </div>
         </div>
       </div>

@@ -1,7 +1,6 @@
 require('dotenv/config');
 const express = require('express');
 const jwt = require('jwt-simple');
-
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -27,7 +26,7 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(morgan('dev'));
 app.use(staticMiddleware);
 app.use(sessionMiddleware);
-// app.use(express.json());
+app.use(express.json());
 
 app.get('/api/health-check', (req, res, next) => {
   db.query('select \'successfully connected\' as "message"')
@@ -265,6 +264,25 @@ app.post('/api/upload-profile', async (req, res) => {
     }
   } catch (err) {
     res.status(500).send(err);
+  }
+});
+
+app.post('/api/setProfilePicture', async (req, res, next) => {
+  try {
+    const picUrl = req.body.pic;
+    const { rows: [newUser] } = await db.query(`
+      UPDATE "profiledata" SET "profilepicurl" = $1 WHERE "user_id" = ${req.session.userId}
+      `,
+    [picUrl]
+    );
+    // send response
+    res.send({
+      status: true,
+      message: 'profile picture uploaded'
+    });
+  } catch (error) {
+    next(error);
+    // res.status(500).send(err);
   }
 });
 

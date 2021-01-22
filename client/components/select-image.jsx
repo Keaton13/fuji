@@ -100,7 +100,7 @@ class selectImage extends React.Component {
               </button>
             </div>
           </form>
-          <Footer setView={this.props.setView} />
+          <Footer setView={this.props.setView} saveSelectedData={this.props.saveSelectedData} />
         </div>
       </div>
     );
