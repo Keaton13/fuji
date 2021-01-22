@@ -127,6 +127,7 @@ class Home extends React.Component {
             <div className='row'>
               <Footer
                 setView={this.props.setView}
+                saveSelectedData={this.props.saveSelectedData}
                 userParams={this.props.userParams}
                 id='footer'
               />

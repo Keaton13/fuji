@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactRoundedImage from 'react-rounded-image';
 import Footer from './footer';
+import AvatarEditorPopup from './avatarEditorPopup';
 
 class Profile extends React.Component {
   constructor(props) {
@@ -19,12 +19,23 @@ class Profile extends React.Component {
       },
       display: {
         current: 'show'
+      },
+      preview: {
+        pic: null
+      },
+      profilepicurl: {
+        pic: null
       }
     };
     // const user = this.props.userInfo.params;
     this.setView = this.setView.bind(this);
     this.handleImageClick = this.handleImageClick.bind(this);
-    this.changeSVGDisplay = this.changeSVGDisplay.bind(this);
+    this.grabProfileData = this.grabProfileData.bind(this);
+    this.grabUserPosts = this.grabUserPosts.bind(this);
+    this.grabUserInfo = this.grabUserInfo.bind(this);
+    this.setProfilePicture = this.setProfilePicture.bind(this);
+    // this.showSVGDisplay = this.showSVGDisplay.bind(this);
+    // this.handleImageSave = this.handleImageSave.bind(this);
   }
 
   componentDidMount() {
@@ -92,18 +103,34 @@ class Profile extends React.Component {
             user: {
               name: this.props.selectedUserParams.data.Name,
               username: this.props.selectedUserParams.data.username
+            },
+            profilepicurl: {
+              pic: json.data.profilepicurl
             }
           });
           this.grabUserPosts(userId);
         } else {
           try {
-            this.setState({
-              profileData: {
-                data: json.data
-              }
-            });
-            this.grabUserPosts(userId);
-            this.grabUserInfo(userId);
+            if (json.data.profilepicurl) {
+              this.setState({
+                profileData: {
+                  data: json.data
+                },
+                profilepicurl: {
+                  pic: json.data.profilepicurl
+                }
+              });
+              this.grabUserPosts(userId);
+              this.grabUserInfo(userId);
+            } else {
+              this.setState({
+                profileData: {
+                  data: json.data
+                }
+              });
+              this.grabUserPosts(userId);
+              this.grabUserInfo(userId);
+            }
           } catch (err) {
             console.error(err);
           }
@@ -137,6 +164,31 @@ class Profile extends React.Component {
       });
   }
 
+  setProfilePicture(dataUrl) {
+    const data = {
+      pic: dataUrl
+    };
+
+    fetch('http://localhost:3000/api/setProfilePicture',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => {
+        this.setState({
+          profilepicurl: {
+            pic: dataUrl
+          }
+        });
+        return res;
+      })
+      .catch(err => {
+      });
+  }
+
   setView() {
     this.props.saveSelectedData({});
     if (this.props.previousView === 'profile') {
@@ -156,7 +208,7 @@ class Profile extends React.Component {
     });
   }
 
-  changeSVGDisplay() {
+  changeSVGDisplay = () => {
     this.setState({
       display: {
         current: 'hidden'
@@ -164,21 +216,47 @@ class Profile extends React.Component {
     });
   }
 
+  handleImageSave = img => {
+    this.setState({
+      preview: {
+        pic: img
+      }
+    });
+    this.setProfilePicture(img);
+  }
+
+  // handleImageSave(img) {
+  //   console.log(img)
+  //   this.setState = ({
+  //     preview: {
+  //       pic: img
+  //     }
+  //  }, () => {
+  //    this.forceUpdate();
+  //  })
+  // }
+
+  setEditorRef(editor) {
+    this.editor = editor;
+  }
+
   render() {
     const user = this.state.user;
     const profileData = this.state.profileData.data;
     const posts = this.state.posts.urls;
     let customClass = null;
+    let profileImage;
     if (this.state.display.current === 'hidden') {
       customClass = 'animation2';
     } else {
       customClass = 'animation';
     }
+    if (this.props.selectedUserParams.data.user_id) {
+      profileImage = this.state.profilepicurl.pic ? <img className="profileImage" src={this.state.profilepicurl.pic} /> : <div className="mt-5">+</div>;
+    } else {
+      profileImage = this.state.profilepicurl.pic ? <img className="profileImage" data-toggle="modal" data-target="#exampleModal" src={this.state.profilepicurl.pic} /> : <div data-toggle="modal" data-target="#exampleModal" className="mt-5">+</div>;
+    }
     if (profileData !== null && user.name !== null && posts !== null) {
-      // const url =
-      //   window.location.origin +
-      //   '/images/uploads/users/' +
-      //   profileData.profilepicurl;
       return (
         <div>
           <div>
@@ -196,12 +274,23 @@ class Profile extends React.Component {
               </g>
             </svg>
           </div>
-          <h1 className="text-center fuji-Font">fuji</h1>
+          <div className="container">
+            <div className="row">
+              <div className="col-4">
+                <button className="btn btn-outline-secondary float-left mt-3"
+                  onClick={this.setView}
+                >back</button>
+              </div>
+              <div className="col-8">
+                <h1 className="text-center fuji-Font float-left mt-2 ml-2">fuji</h1>
+              </div>
+            </div>
+          </div>
           <div className='contianer overflow-hidden'>
             <div className="row">
               <div className="col-6 pr-0">
-                <div className="col circleBase type2 text-center float-left MgL-1">
-                  <h2 className="Mg2" style={{ color: '#CDCDCD' }}>+</h2>
+                <div className="col circleBase type2 text-center padding-0 float-left MgL-1">
+                  {profileImage}
                 </div>
               </div>
               <div className="col-6">
@@ -247,9 +336,9 @@ class Profile extends React.Component {
                 </button>
               </div>
             </div>
-            <div className='row' onTouchStart={this.changeSVGDisplay}>
-              <div className="pre-scrollable mh-prescroll">
-                {posts.map(post => {
+            <div className='row'>
+              <div className="pre-scrollable mh-prescroll w-100" onTouchStart={this.changeSVGDisplay}>
+                {posts.length > 0 ? posts.map(post => {
                   return (
                     <img
                       src={
@@ -261,9 +350,24 @@ class Profile extends React.Component {
                       onClick={() => { this.handleImageClick(post.pictureUrl); }}
                     ></img>
                   );
-                })}
+                }) : <div className="container mt-5">
+                  <div className="row">
+                    <div className="col text-center">
+                      <h1>Come on man!</h1>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col text-center">
+                      <h3>He ain't postin</h3>
+                    </div>
+                  </div>
+                </div>
+                }
               </div>
             </div>
+          </div>
+          <div className="row">
+            <AvatarEditorPopup handleImageSave={this.handleImageSave} object={this} profileData={this.state.profileData.data} profilePic={this.state.profilepicurl.pic} />
           </div>
           <button
             name='button'
@@ -273,7 +377,6 @@ class Profile extends React.Component {
           >
             Block
           </button>
-          <Footer setView={this.props.setView}/>
         </div>
       );
     } else {

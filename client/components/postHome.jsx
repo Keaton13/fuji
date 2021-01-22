@@ -167,7 +167,7 @@ class PostHome extends React.Component {
               </div>
             </div>
           </div>
-          <Footer setView={this.props.setView} />
+          <Footer setView={this.props.setView} saveSelectedData={this.props.saveSelectedData}/>
         </div>
       );
     } else {
