@@ -1,5 +1,4 @@
 import React from 'react';
-import Footer from './footer';
 import AvatarEditorPopup from './avatarEditorPopup';
 
 class Profile extends React.Component {
@@ -25,6 +24,9 @@ class Profile extends React.Component {
       },
       profilepicurl: {
         pic: null
+      },
+      following: {
+        status: false
       }
     };
     // const user = this.props.userInfo.params;
@@ -33,7 +35,12 @@ class Profile extends React.Component {
     this.grabProfileData = this.grabProfileData.bind(this);
     this.grabUserPosts = this.grabUserPosts.bind(this);
     this.grabUserInfo = this.grabUserInfo.bind(this);
+    this.grabUsersFollowers = this.grabUsersFollowers.bind(this);
     this.setProfilePicture = this.setProfilePicture.bind(this);
+    this.followUser = this.followUser.bind(this);
+    this.followUserCheck = this.followUserCheck.bind(this);
+    this.unfollowUser = this.unfollowUser.bind(this);
+    this.updateUserStats = this.updateUserStats.bind(this);
     // this.showSVGDisplay = this.showSVGDisplay.bind(this);
     // this.handleImageSave = this.handleImageSave.bind(this);
   }
@@ -57,12 +64,132 @@ class Profile extends React.Component {
         console.err(err);
       }
     }
+  }
 
+  followUser() {
+    const user = {
+      user: this.props.selectedUserParams.data.user_id
+    };
+    fetch('http://localhost:3000/api/insertFollowers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        if (json.name === 'error') {
+          return json;
+        } else {
+          this.updateUserStats();
+          return json;
+        }
+
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  unfollowUser() {
+    const user = {
+      user: this.props.selectedUserParams.data.user_id
+    };
+    fetch('http://localhost:3000/api/unfollowUser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        if (json.name === 'error') {
+          return json;
+        } else {
+          this.updateUserStats('remove');
+          return json;
+        }
+
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  updateUserStats(param) {
+    if (param === 'remove') {
+      fetch('http://localhost:3000/api/updateUserStatsHomiesRemove',
+        {
+          method: 'GET'
+        })
+        .then(res => {
+          return res.json();
+        })
+        .then(json => {
+          this.grabUsersFollowers();
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    } else {
+      fetch('http://localhost:3000/api/updateUserStatsHomies',
+        {
+          method: 'GET'
+        })
+        .then(res => {
+          return res.json();
+        })
+        .then(json => {
+          this.grabUsersFollowers();
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
+  }
+
+  grabUsersFollowers() {
+    fetch('http://localhost:3000/api/grabUserFollowers', {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        this.props.saveUsersFollowers(json.data);
+        if (this.state.following.status === false) {
+          this.setState({
+            following: {
+              status: true
+            }
+          });
+        } else {
+          this.setState({
+            following: {
+              status: false
+            }
+          });
+        }
+
+        return json;
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   grabUserInfo(userId) {
     fetch(`http://localhost:3000/api/grabUserInfo/${userId}`, {
-      method: 'get',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       }
@@ -157,11 +284,24 @@ class Profile extends React.Component {
             urls: json.data
           }
         });
+        this.followUserCheck();
         return json;
       })
       .catch(err => {
         console.error(err);
       });
+  }
+
+  followUserCheck() {
+    for (let i = 0; i < this.props.followers.users.length; i++) {
+      if (this.props.followers.users[i].user_id_2 === this.props.selectedUserParams.data.user_id) {
+        this.setState({
+          following: {
+            status: true
+          }
+        });
+      }
+    }
   }
 
   setProfilePicture(dataUrl) {
@@ -186,6 +326,7 @@ class Profile extends React.Component {
         return res;
       })
       .catch(err => {
+        console.error(err);
       });
   }
 
@@ -244,6 +385,7 @@ class Profile extends React.Component {
     const user = this.state.user;
     const profileData = this.state.profileData.data;
     const posts = this.state.posts.urls;
+    let button = null;
     let customClass = null;
     let profileImage;
     if (this.state.display.current === 'hidden') {
@@ -255,6 +397,25 @@ class Profile extends React.Component {
       profileImage = this.state.profilepicurl.pic ? <img className="profileImage" src={this.state.profilepicurl.pic} /> : <div className="mt-5">+</div>;
     } else {
       profileImage = this.state.profilepicurl.pic ? <img className="profileImage" data-toggle="modal" data-target="#exampleModal" src={this.state.profilepicurl.pic} /> : <div data-toggle="modal" data-target="#exampleModal" className="mt-5">+</div>;
+    }
+    if (this.state.following.status === true) {
+      button = <button
+        name='button'
+        type='button'
+        className='align-center widthProfileButton buttonBorderRadiusFollowing buttonFontFollowing'
+        onClick={this.unfollowUser}
+      >
+        Following
+      </button>;
+    } else {
+      button = <button
+        name='button'
+        type='button'
+        className='align-center widthProfileButton buttonBorderRadius buttonFont'
+        onClick={this.followUser}
+      >
+        Follow!
+      </button>;
     }
     if (profileData !== null && user.name !== null && posts !== null) {
       return (
@@ -299,29 +460,22 @@ class Profile extends React.Component {
                   <h6 className="width100 font-sizeData">{'@' + user.username}</h6>
                 </div>
                 <div className="row mt-1 mr-1 float-right">
-                  <button
-                    name='button'
-                    type='button'
-                    className='align-center widthProfileButton buttonBorderRadius buttonFont'
-                    onClick={this.signInData}
-                  >
-                    Follow!
-                  </button>
+                  {button}
                 </div>
               </div>
             </div>
             <div className="row">
               <div className="col-6 Mg4">
                 <div className='col-sm width25 float-right padding-0 text-center font-sizeStats'>
-                  <h6 className='mb-1 font-sizeNumber'>{profileData.numberofposts}</h6>
+                  <h6 className='mb-1 font-sizeNumber'>{profileData.homies}</h6>
                   <p className="font-sizeStats">homies</p>
                 </div>
                 <div className='col-sm width25 float-right padding-0 text-center font-sizeStats mr-2'>
-                  <h6 className='mb-1 font-sizeNumber'>{profileData.saved}</h6>
+                  <h6 className='mb-1 font-sizeNumber'>{profileData.postTotal}</h6>
                   <p className="font-sizeStats">photos</p>
                 </div>
                 <div className='col-sm width25 float-right padding-0 text-center font-sizeStats mr-2'>
-                  <h6 className='mb-1 font-sizeNumber'>{profileData.saved}</h6>
+                  <h6 className='mb-1 font-sizeNumber'>{profileData.commentTotal}</h6>
                   <p className="font-sizeStats">comments</p>
                 </div>
               </div>

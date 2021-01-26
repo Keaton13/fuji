@@ -12,6 +12,7 @@ class selectImage extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.setView = this.setView.bind(this);
+    this.updateUserStats = this.updateUserStats.bind(this);
   }
 
   onChange(e) {
@@ -52,7 +53,23 @@ class selectImage extends React.Component {
         return res.json();
       })
       .then(json => {
-        this.props.setView('home');
+        this.updateUserStats();
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  updateUserStats() {
+    fetch('http://localhost:3000/api/updateUserStats',
+      {
+        method: 'GET'
+      })
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        this.props.setView('postHome');
       })
       .catch(err => {
         console.error(err);
@@ -69,37 +86,42 @@ class selectImage extends React.Component {
             <button
               name='button'
               type='button'
-              className='btn btn-outline-secondary align-center w-100'
+              className='btn btn-outline-secondary align-center ml-3'
               onClick={this.setView}
             >
               Back
             </button>
           </div>
-          <div className='row'>
-            <img src={this.state.file} className="img-fluid mh-selectImag"></img>
+          <div className='row minHeight-selectImage'>
+            <img src={this.state.file} className="img-fluid mh-selectImage"></img>
+          </div>
+          <div className="row">
+            <div className="col">
+              <form encType="multipart/form-data" action="">
+                <div className='form-group align-center mt-3'>
+                  <input
+                    name='avatar'
+                    type='file'
+                    className='form-control-file btn btn-dark align-center'
+                    id='exampleFormControlFile1'
+                    onChange={this.onChange}
+                  ></input>
+                </div>
+                <div className='form-group text-center'>
+                  <button
+                    className="btn btn-dark align-center w-75"
+                    type="button"
+                    value="upload"
+                    onClick={this.sendFile}
+                  >
+                    Send it!
+                  </button>
+                </div>
+              </form>
+            </div>
+
           </div>
 
-          <form encType="multipart/form-data" action="">
-            <div className='form-group align-center mt-3'>
-              <input
-                name='avatar'
-                type='file'
-                className='form-control-file btn btn-dark align-center'
-                id='exampleFormControlFile1'
-                onChange={this.onChange}
-              ></input>
-            </div>
-            <div className='form-group text-center'>
-              <button
-                className="btn btn-dark align-center w-75"
-                type="button"
-                value="upload"
-                onClick={this.sendFile}
-              >
-                Send it!
-              </button>
-            </div>
-          </form>
           <Footer setView={this.props.setView} saveSelectedData={this.props.saveSelectedData} />
         </div>
       </div>
