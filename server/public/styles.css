@@ -91,11 +91,14 @@
 .mw-imagePicker {
   max-width: 150px;
 }
+.minHeight-selectImage {
+  min-height: 250px;
+}
 .mh-imagePicker {
   max-height: 100px
 }
 .mh-selectImage {
-  max-height: 350px;
+  max-height: 450px;
   margin: auto;
 }
 .mh-prescroll {
@@ -234,6 +237,14 @@ font-weight: bold;
   border-radius: 28px;
 }
 
+.buttonBorderRadiusFollowing {
+  background: #007bff;
+  border: 1.5px solid #AFAFAF;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 28px;
+}
+
 .buttonFont{
   font-family: "Ubuntu"ww;
 font-style: normal;
@@ -243,6 +254,16 @@ line-height: 15px;
 letter-spacing: 0.04em;
 text-transform: uppercase;
 color: #535353;
+}
+.buttonFontFollowing{
+  font-family: "Ubuntu"ww;
+font-style: normal;
+font-weight: 500;
+font-size: 13px;
+line-height: 15px;
+letter-spacing: 0.04em;
+text-transform: uppercase;
+color: #ffffff;
 }
 /*M 0 0 Q 50 100 150 150 Q 300 200 400 100 Q 500 50 550 150 C 700 300 750 100 800 0 */
 .wave-container {
@@ -273,4 +294,7 @@ html, body, #root, .App {
 }
 #addImageContainer{
   height: 10rem;
+}
+.canvasBorder {
+  border: 1px solid grey;
 }

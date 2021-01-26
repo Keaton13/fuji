@@ -43,8 +43,7 @@ class SignUp extends React.Component {
   }
 
   handleViewChange(user) {
-    this.props.saveUserData(user.userName, user.userId);
-    this.props.setView('sign-up2');
+    this.props.setView('sign-in');
   }
 
   sendLoginData() {
@@ -62,6 +61,32 @@ class SignUp extends React.Component {
       })
       .then(json => {
         if (json.token) {
+          this.props.saveUserData(json.userName, json.userId);
+          this.sendProfileData(json);
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  sendProfileData(user) {
+    const data = {
+      userId: user.userId
+    };
+    fetch('http://localhost:3000/api/upload-data',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        if (json.status === 200) {
           this.handleViewChange(json);
         }
       })

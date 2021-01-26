@@ -298,32 +298,115 @@ app.get('/api/profileData/:userId', async (req, res) => {
   }
 });
 
+app.get('/api/updateUserStats', async (req, res) => {
+  try {
+    const { rows: [profileData] } = await db.query(`UPDATE "profiledata" SET "postTotal" = "postTotal" + 1 WHERE "user_id" = ${req.session.userId}`);
+    res.status(200).send({
+      message: 'Data has been sent successfully!',
+      status: 200
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.get('/api/updateUserStatsComments', async (req, res) => {
+  try {
+    const { rows: [profileData] } = await db.query(`UPDATE "profiledata" SET "commentTotal" = "commentTotal" + 1 WHERE "user_id" = ${req.session.userId}`);
+    res.status(200).send({
+      message: 'Data has been sent successfully!',
+      status: 200
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.get('/api/updateUserStatsHomies', async (req, res) => {
+  try {
+    const { rows: [profileData] } = await db.query(`UPDATE "profiledata" SET "homies" = "homies" + 1 WHERE "user_id" = ${req.session.userId}`);
+    res.status(200).send({
+      message: 'Data has been sent successfully!',
+      status: 200
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.get('/api/updateUserStatsHomiesRemove', async (req, res) => {
+  try {
+    const { rows: [profileData] } = await db.query(`UPDATE "profiledata" SET "homies" = "homies" - 1 WHERE "user_id" = ${req.session.userId}`);
+    res.status(200).send({
+      message: 'Data has been sent successfully!',
+      status: 200
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.get('/api/grabUserFollowers', async (req, res) => {
+  try {
+    const { rows: profileData = [] } = await db.query(`SELECT * FROM "followers" WHERE "user_id_1" = ${req.session.userId}`);
+    res.status(200).send({
+      message: 'Data has been sent successfully!',
+      status: 200,
+      data: profileData
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.post('/api/insertFollowers', async (req, res) => {
+  const selectedUser = req.body.user;
+  try {
+    const { rows: [profileData] } = await db.query(`INSERT INTO "followers" ("user_id_1", "user_id_2") VALUES (${req.session.userId}, ${selectedUser})`);
+    res.status(200).send({
+      message: 'Data has been sent successfully!',
+      status: 200
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+app.post('/api/unfollowUser', async (req, res) => {
+  const selectedUser = req.body.user;
+  try {
+    const { rows: [profileData] } = await db.query(`DELETE FROM "followers" WHERE "user_id_1" = ${req.session.userId} AND "user_id_2" = ${selectedUser}`);
+    res.status(200).send({
+      message: 'Data has been sent successfully!',
+      status: 200
+    });
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
 app.post('/api/upload-data', async (req, res) => {
   try {
-    if (req.body.data.status === true) {
-      try {
-        const userId = req.body.userId;
-        const description = req.body.description;
-        const profilepicurl = req.body.profilepicurl;
-        const { rows: [newUser] } = await db.query(`
+    try {
+      const userId = req.body.userId;
+      const { rows: [newUser] } = await db.query(`
           INSERT INTO "profiledata"
-          ("user_id", "numberofposts", "saved", "description", "profilepicurl")
-          VALUES ($1, $2, $3, $4, $5)
+          ("user_id", "postTotal", "homies", "description", "profilepicurl", "commentTotal")
+          VALUES ($1, $2, $3, $4, $5, $6)
           returning "user_id"`,
-        [userId, 0, 0, description, profilepicurl]
-        );
-        res.status(200).send({
-          message: 'Data has been sent successfully!',
-          status: 200
-        });
-      } catch (error) {
-        if (error.code === '23505') {
-          throw new ClientError('email already in use', 422);
-        }
-        throw new ClientError('error saving user', 500);
+      [userId, 0, 0, 'test', null, 0]
+      );
+      res.status(200).send({
+        message: 'Data has been sent successfully!',
+        status: 200
+      });
+    } catch (error) {
+      if (error.code === '23505') {
+        throw new ClientError('email already in use', 422);
       }
-
+      throw new ClientError('error saving user', 500);
     }
+
   } catch (err) {
     res.status(500).send(err);
   }

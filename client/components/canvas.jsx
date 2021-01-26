@@ -59,12 +59,29 @@ const Canvas = props => {
         return res.json();
       })
       .then(json => {
+        updateUserStats();
         return json;
       })
       .catch(err => {
         console.error(err);
       });
 
+  };
+
+  const updateUserStats = () => {
+    fetch('http://localhost:3000/api/updateUserStatsComments', {
+      method: 'GET'
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        props.setView('postHome');
+        return json;
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
 
   const handleMouseMove = e => {
@@ -190,7 +207,7 @@ const Canvas = props => {
       </div> */}
       <div className="row h-75">
         <div
-          className="col my-auto padding-0"
+          className="col my-auto padding-0 canvasBorder"
           onTouchEnd={e => {
             // register event position
             stageRef.current.setPointersPositions(e);
@@ -251,7 +268,7 @@ const Canvas = props => {
                 <div style={{
                   position: 'absolute',
                   left: '90%',
-                  top: '30%'
+                  top: '36%'
                 }}>
                   <div className="btn-group-vertical">
                     <button type="button" className="btn btn-secondary" onClick={setImageDisplayFunction}>+</button>
@@ -279,7 +296,7 @@ const Canvas = props => {
                   {inputDisplay === 'false' ? <TextInput currentText={currentText} setCurrentText={setCurrentText} saveText={saveText} /> : null}
                 </div>
               </Portal>
-              <Text text="Just start drawing" x={125} y={225} draggable={true} fontSize={20} />
+              <Text text="Just start drawing" x={125} y={props.selectedPictureHeight.height / 2} draggable={true} fontSize={20} />
               {lines.map((line, i) => (
                 <Line
                   key={i}

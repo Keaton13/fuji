@@ -25,10 +25,11 @@ class PostHome extends React.Component {
     this.grabUserPosts = this.grabUserPosts.bind(this);
     this.grabPostComments = this.grabPostComments.bind(this);
     this.setCommentState = this.setCommentState.bind(this);
+    this.grabUsersFollowers = this.grabUsersFollowers.bind(this);
   }
 
   componentDidMount() {
-    this.grabUserPosts();
+    this.grabUsersFollowers();
   }
 
   handleChange(checked) {
@@ -64,7 +65,7 @@ class PostHome extends React.Component {
 
   }
 
-  async grabUserPosts() {
+  async grabUserPosts(data) {
     await fetch('http://localhost:3000/api/grabUserFeed', {
       method: 'get',
       headers: {
@@ -76,13 +77,20 @@ class PostHome extends React.Component {
       })
       .then(json => {
         const commentIds = [];
+        const userPosts = [];
         for (let i = 0; i < json.data.length; i++) {
+          const userId = json.data[i].userId;
           const postId = json.data[i].postId;
-          commentIds.push(postId);
+          for (let v = 0; v < data.length; v++) {
+            if (userId === data[v].user_id_2) {
+              commentIds.push(postId);
+              userPosts.push(json.data[i]);
+            }
+          }
         }
         this.setState({
           posts: {
-            data: json.data
+            data: userPosts
           },
           commentIdArray: {
             ids: commentIds
@@ -102,6 +110,26 @@ class PostHome extends React.Component {
         comments: data
       }
     });
+  }
+
+  grabUsersFollowers() {
+    fetch('http://localhost:3000/api/grabUserFollowers', {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+        this.props.saveUsersFollowers(json.data);
+        this.grabUserPosts(json.data);
+        return json;
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   async grabPostComments() {
