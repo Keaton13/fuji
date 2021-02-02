@@ -16,15 +16,45 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+ALTER TABLE ONLY public.users DROP CONSTRAINT users_pkey;
+ALTER TABLE ONLY public.profiledata DROP CONSTRAINT profiledata_pkey;
+ALTER TABLE ONLY public.followers DROP CONSTRAINT followers_user_id_1_user_id_2_key;
+ALTER TABLE public.users ALTER COLUMN user_id DROP DEFAULT;
+ALTER TABLE public."userPosts" ALTER COLUMN "postId" DROP DEFAULT;
+ALTER TABLE public.comments ALTER COLUMN "commentId" DROP DEFAULT;
+DROP SEQUENCE public.users_user_id_seq;
+DROP TABLE public.users;
+DROP SEQUENCE public."userPosts_postId_seq";
+DROP TABLE public."userPosts";
+DROP TABLE public.profiledata;
+DROP TABLE public.followers;
+DROP SEQUENCE public."comments_commentId_seq";
+DROP TABLE public.comments;
+DROP EXTENSION plpgsql;
+DROP SCHEMA public;
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: public; Type: SCHEMA; Schema: -; Owner: -
+--
+
+CREATE SCHEMA public;
+
+
+--
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -35,7 +65,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: comments; Type: TABLE; Schema: public; Owner: dev
+-- Name: comments; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.comments (
@@ -48,10 +78,8 @@ CREATE TABLE public.comments (
 );
 
 
-ALTER TABLE public.comments OWNER TO dev;
-
 --
--- Name: comments_commentId_seq; Type: SEQUENCE; Schema: public; Owner: dev
+-- Name: comments_commentId_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public."comments_commentId_seq"
@@ -63,17 +91,15 @@ CREATE SEQUENCE public."comments_commentId_seq"
     CACHE 1;
 
 
-ALTER TABLE public."comments_commentId_seq" OWNER TO dev;
-
 --
--- Name: comments_commentId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dev
+-- Name: comments_commentId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public."comments_commentId_seq" OWNED BY public.comments."commentId";
 
 
 --
--- Name: followers; Type: TABLE; Schema: public; Owner: dev
+-- Name: followers; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.followers (
@@ -82,10 +108,8 @@ CREATE TABLE public.followers (
 );
 
 
-ALTER TABLE public.followers OWNER TO dev;
-
 --
--- Name: profiledata; Type: TABLE; Schema: public; Owner: dev
+-- Name: profiledata; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.profiledata (
@@ -98,10 +122,8 @@ CREATE TABLE public.profiledata (
 );
 
 
-ALTER TABLE public.profiledata OWNER TO dev;
-
 --
--- Name: userPosts; Type: TABLE; Schema: public; Owner: dev
+-- Name: userPosts; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public."userPosts" (
@@ -112,10 +134,8 @@ CREATE TABLE public."userPosts" (
 );
 
 
-ALTER TABLE public."userPosts" OWNER TO dev;
-
 --
--- Name: userPosts_postId_seq; Type: SEQUENCE; Schema: public; Owner: dev
+-- Name: userPosts_postId_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public."userPosts_postId_seq"
@@ -127,17 +147,15 @@ CREATE SEQUENCE public."userPosts_postId_seq"
     CACHE 1;
 
 
-ALTER TABLE public."userPosts_postId_seq" OWNER TO dev;
-
 --
--- Name: userPosts_postId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dev
+-- Name: userPosts_postId_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public."userPosts_postId_seq" OWNED BY public."userPosts"."postId";
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: dev
+-- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.users (
@@ -150,10 +168,8 @@ CREATE TABLE public.users (
 );
 
 
-ALTER TABLE public.users OWNER TO dev;
-
 --
--- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: dev
+-- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.users_user_id_seq
@@ -165,38 +181,36 @@ CREATE SEQUENCE public.users_user_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.users_user_id_seq OWNER TO dev;
-
 --
--- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dev
+-- Name: users_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.users_user_id_seq OWNED BY public.users.user_id;
 
 
 --
--- Name: comments commentId; Type: DEFAULT; Schema: public; Owner: dev
+-- Name: comments commentId; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.comments ALTER COLUMN "commentId" SET DEFAULT nextval('public."comments_commentId_seq"'::regclass);
 
 
 --
--- Name: userPosts postId; Type: DEFAULT; Schema: public; Owner: dev
+-- Name: userPosts postId; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public."userPosts" ALTER COLUMN "postId" SET DEFAULT nextval('public."userPosts_postId_seq"'::regclass);
 
 
 --
--- Name: users user_id; Type: DEFAULT; Schema: public; Owner: dev
+-- Name: users user_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN user_id SET DEFAULT nextval('public.users_user_id_seq'::regclass);
 
 
 --
--- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: dev
+-- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.comments ("commentId", "postId", user_id, "commentPicUrl", "commentEditString", created_on) FROM stdin;
@@ -207,7 +221,7 @@ COPY public.comments ("commentId", "postId", user_id, "commentPicUrl", "commentE
 
 
 --
--- Data for Name: followers; Type: TABLE DATA; Schema: public; Owner: dev
+-- Data for Name: followers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.followers (user_id_1, user_id_2) FROM stdin;
@@ -223,7 +237,7 @@ COPY public.followers (user_id_1, user_id_2) FROM stdin;
 
 
 --
--- Data for Name: profiledata; Type: TABLE DATA; Schema: public; Owner: dev
+-- Data for Name: profiledata; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.profiledata (user_id, "postTotal", homies, description, profilepicurl, "commentTotal") FROM stdin;
@@ -235,7 +249,7 @@ COPY public.profiledata (user_id, "postTotal", homies, description, profilepicur
 
 
 --
--- Data for Name: userPosts; Type: TABLE DATA; Schema: public; Owner: dev
+-- Data for Name: userPosts; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public."userPosts" ("userId", "postId", "pictureUrl", "createdAt") FROM stdin;
@@ -255,7 +269,7 @@ COPY public."userPosts" ("userId", "postId", "pictureUrl", "createdAt") FROM std
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: dev
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.users (user_id, username, password, "Name", email, created_at) FROM stdin;
@@ -267,28 +281,28 @@ COPY public.users (user_id, username, password, "Name", email, created_at) FROM 
 
 
 --
--- Name: comments_commentId_seq; Type: SEQUENCE SET; Schema: public; Owner: dev
+-- Name: comments_commentId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public."comments_commentId_seq"', 37, true);
 
 
 --
--- Name: userPosts_postId_seq; Type: SEQUENCE SET; Schema: public; Owner: dev
+-- Name: userPosts_postId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public."userPosts_postId_seq"', 55, true);
 
 
 --
--- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dev
+-- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
 SELECT pg_catalog.setval('public.users_user_id_seq', 116, true);
 
 
 --
--- Name: followers followers_user_id_1_user_id_2_key; Type: CONSTRAINT; Schema: public; Owner: dev
+-- Name: followers followers_user_id_1_user_id_2_key; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.followers
@@ -296,7 +310,7 @@ ALTER TABLE ONLY public.followers
 
 
 --
--- Name: profiledata profiledata_pkey; Type: CONSTRAINT; Schema: public; Owner: dev
+-- Name: profiledata profiledata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.profiledata
@@ -304,11 +318,18 @@ ALTER TABLE ONLY public.profiledata
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: dev
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (user_id);
+
+
+--
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: -
+--
+
+GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
