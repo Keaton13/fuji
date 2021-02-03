@@ -43,7 +43,7 @@ class selectImage extends React.Component {
     const image = document.querySelector('input[type="file"]').files[0];
     formData.append('avatar', image);
     // console.log(formData);
-    fetch('http://localhost:3000/api/upload-avatar',
+    fetch('https://dev.fuji.social/api/upload-avatar',
       {
         mode: 'no-cors',
         method: 'POST',
@@ -61,7 +61,7 @@ class selectImage extends React.Component {
   }
 
   updateUserStats() {
-    fetch('http://localhost:3000/api/updateUserStats',
+    fetch('https://dev.fuji.social/api/updateUserStats',
       {
         method: 'GET'
       })

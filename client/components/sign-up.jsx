@@ -48,7 +48,7 @@ class SignUp extends React.Component {
 
   sendLoginData() {
     const data = this.state;
-    fetch('/api/sign-up',
+    fetch('https://dev.fuji.social/api/sign-up',
       {
         method: 'POST',
         headers: {
@@ -74,7 +74,7 @@ class SignUp extends React.Component {
     const data = {
       userId: user.userId
     };
-    fetch('/api/upload-data',
+    fetch('https://dev.fuji.social/api/upload-data',
       {
         method: 'POST',
         headers: {

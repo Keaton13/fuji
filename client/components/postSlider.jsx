@@ -29,7 +29,7 @@ class PostSlider extends React.Component {
               <div>
                 <img
                   src={
-                    'http://localhost:3000/images/uploads/' +
+                    'https://dev.fuji.social/images/uploads/' +
                             post.pictureUrl
                   }
                   key={post.postId}

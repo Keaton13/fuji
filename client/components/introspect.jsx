@@ -70,7 +70,7 @@ class Introspect extends React.Component {
           </div>
           <div className='row h-75 align-items-center text-center'>
             <img
-              src={'http://localhost:3000/images/uploads/' + this.state.img.url}
+              src={'https://dev.fuji.social/images/uploads/' + this.state.img.url}
               className='img-fluid'
               onLoad={this.imgLoad}
             ></img>

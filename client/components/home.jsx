@@ -18,7 +18,7 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/api/users', {
+    fetch('https://dev.fuji.social/api/users', {
       method: 'GET'
     })
       .then(res => {

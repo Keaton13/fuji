@@ -35,7 +35,7 @@ class SignUp2 extends React.Component {
     const formData = new FormData();
     const image = document.querySelector('input[type="file"]').files[0];
     formData.append('profile', image);
-    fetch('http://localhost:3000/api/upload-profile', {
+    fetch('https://dev.fuji.social/api/upload-profile', {
       mode: 'no-cors',
       method: 'POST',
       body: formData
@@ -60,7 +60,7 @@ class SignUp2 extends React.Component {
       profilepicurl: data.data.name,
       data: data
     };
-    fetch('http://localhost:3000/api/upload-data', {
+    fetch('https://dev.fuji.social/api/upload-data', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

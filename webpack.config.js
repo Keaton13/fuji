@@ -48,7 +48,7 @@ module.exports = {
     host: '0.0.0.0',
     port: process.env.DEV_SERVER_PORT,
     proxy: {
-      '/api': `http://localhost:${process.env.PORT}`
+      '/api': `https://dev.fuji.social:${process.env.PORT}`
     },
     stats: 'minimal',
     watchContentBase: true

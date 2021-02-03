@@ -66,7 +66,7 @@ class PostHome extends React.Component {
   }
 
   async grabUserPosts(data) {
-    await fetch('http://localhost:3000/api/grabUserFeed', {
+    await fetch('https://dev.fuji.social/api/grabUserFeed', {
       method: 'get',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -113,7 +113,7 @@ class PostHome extends React.Component {
   }
 
   grabUsersFollowers() {
-    fetch('http://localhost:3000/api/grabUserFollowers', {
+    fetch('https://dev.fuji.social/api/grabUserFollowers', {
       method: 'get',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -136,7 +136,7 @@ class PostHome extends React.Component {
     const commentsFromServer = [];
     for (let i = 0; i < this.state.commentIdArray.ids.length; i++) {
       const commentId = this.state.commentIdArray.ids[i] + '';
-      await fetch(`http://localhost:3000/api/grabPostComments/${commentId}`, {
+      await fetch(`https://dev.fuji.social/api/grabPostComments/${commentId}`, {
         method: 'get',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded'

@@ -70,7 +70,7 @@ class Profile extends React.Component {
     const user = {
       user: this.props.selectedUserParams.data.user_id
     };
-    fetch('http://localhost:3000/api/insertFollowers', {
+    fetch('https://dev.fuji.social/api/insertFollowers', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -98,7 +98,7 @@ class Profile extends React.Component {
     const user = {
       user: this.props.selectedUserParams.data.user_id
     };
-    fetch('http://localhost:3000/api/unfollowUser', {
+    fetch('https://dev.fuji.social/api/unfollowUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -124,7 +124,7 @@ class Profile extends React.Component {
 
   updateUserStats(param) {
     if (param === 'remove') {
-      fetch('http://localhost:3000/api/updateUserStatsHomiesRemove',
+      fetch('https://dev.fuji.social/api/updateUserStatsHomiesRemove',
         {
           method: 'GET'
         })
@@ -138,7 +138,7 @@ class Profile extends React.Component {
           console.error(err);
         });
     } else {
-      fetch('http://localhost:3000/api/updateUserStatsHomies',
+      fetch('https://dev.fuji.social/api/updateUserStatsHomies',
         {
           method: 'GET'
         })
@@ -155,7 +155,7 @@ class Profile extends React.Component {
   }
 
   grabUsersFollowers() {
-    fetch('http://localhost:3000/api/grabUserFollowers', {
+    fetch('https://dev.fuji.social/api/grabUserFollowers', {
       method: 'get',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -188,7 +188,7 @@ class Profile extends React.Component {
   }
 
   grabUserInfo(userId) {
-    fetch(`http://localhost:3000/api/grabUserInfo/${userId}`, {
+    fetch(`https://dev.fuji.social/api/grabUserInfo/${userId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -212,7 +212,7 @@ class Profile extends React.Component {
   }
 
   grabProfileData(userId) {
-    fetch(`http://localhost:3000/api/profileData/${userId}`, {
+    fetch(`https://dev.fuji.social/api/profileData/${userId}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -269,7 +269,7 @@ class Profile extends React.Component {
   }
 
   grabUserPosts(userId) {
-    fetch(`http://localhost:3000/api/grabUserPosts/${userId}`, {
+    fetch(`https://dev.fuji.social/api/grabUserPosts/${userId}`, {
       method: 'get',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -309,7 +309,7 @@ class Profile extends React.Component {
       pic: dataUrl
     };
 
-    fetch('http://localhost:3000/api/setProfilePicture',
+    fetch('https://dev.fuji.social/api/setProfilePicture',
       {
         method: 'POST',
         headers: {
@@ -496,7 +496,7 @@ class Profile extends React.Component {
                   return (
                     <img
                       src={
-                        'http://localhost:3000/images/uploads/' +
+                        'https://dev.fuji.social/images/uploads/' +
                         post.pictureUrl
                       }
                       key={post.postId}

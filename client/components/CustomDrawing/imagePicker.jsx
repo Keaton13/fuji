@@ -20,7 +20,7 @@ class ImagePicker extends React.Component {
 
   grabUserPosts() {
     const userId = this.props.userParams.user_id;
-    fetch(`http://localhost:3000/api/grabUserPosts/${userId}`, {
+    fetch(`https://dev.fuji.social/api/grabUserPosts/${userId}`, {
       method: 'get',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
@@ -62,7 +62,7 @@ class ImagePicker extends React.Component {
                 <div className="col" key={post.postId}>
                   <img
                     className="mw-imagePicker, mh-imagePicker margin-auto"
-                    src={'http://localhost:3000/images/uploads/' +
+                    src={'https://dev.fuji.social/images/uploads/' +
                                             post.pictureUrl}
                     draggable="true"
                     onDragStart={e => {

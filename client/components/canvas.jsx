@@ -17,7 +17,7 @@ const Canvas = props => {
   const [imageDisplay, setImageDisplay] = React.useState('true');
   const [inputDisplay, setInputDisplay] = React.useState('true');
   const [colorDisplay, setColorDisplay] = React.useState('true');
-  const [icons, seticons] = React.useState(['http://localhost:3000/images/Arrow.png']);
+  const [icons, seticons] = React.useState(['https://dev.fuji.social/images/Arrow.png']);
   const [texts, setTexts] = React.useState([]);
   const [selectedId2, selectText] = React.useState(null);
   const [selectedId3, selectImage] = React.useState(null);
@@ -48,7 +48,7 @@ const Canvas = props => {
       userId: props.userParams.user_id
     };
 
-    fetch('http://localhost:3000/api/upload-comment-data', {
+    fetch('https://dev.fuji.social/api/upload-comment-data', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -69,7 +69,7 @@ const Canvas = props => {
   };
 
   const updateUserStats = () => {
-    fetch('http://localhost:3000/api/updateUserStatsComments', {
+    fetch('https://dev.fuji.social/api/updateUserStatsComments', {
       method: 'GET'
     })
       .then(res => {
@@ -153,13 +153,13 @@ const Canvas = props => {
   const setBrushTypeFunction = () => {
     if (tool === 'mouse') {
       setTool('pen');
-      seticons(['http://localhost:3000/images/paint-brush.png']);
+      seticons(['https://dev.fuji.social/images/paint-brush.png']);
     } else if (tool === 'pen') {
       setTool('eraser');
-      seticons(['http://localhost:3000/images/Eraser.png']);
+      seticons(['https://dev.fuji.social/images/Eraser.png']);
     } else {
       setTool('mouse');
-      seticons(['http://localhost:3000/images/Arrow.png']);
+      seticons(['https://dev.fuji.social/images/Arrow.png']);
     }
   };
 
@@ -274,7 +274,7 @@ const Canvas = props => {
                     <button type="button" className="btn btn-secondary" onClick={setImageDisplayFunction}>+</button>
                     <button type="button" className="btn btn-secondary" onClick={setTextDisplayFunction}>T</button>
                     <button type="button" className="btn btn-secondary" onClick={setBrushTypeFunction}><img src={icons} className="width100"></img></button>
-                    <button type="button" className="btn btn-secondary" onClick={setColorPickerFunction}><img src="http://localhost:3000/images/ColorWheel.png" className="width100"></img></button>
+                    <button type="button" className="btn btn-secondary" onClick={setColorPickerFunction}><img src="https://dev.fuji.social/images/ColorWheel.png" className="width100"></img></button>
                     <div className="btn-group dropleft width25" role="group">
                       <button id="btnGroupDrop1" type="button" className="btn btn-secondary dropdown-toggle pull-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
