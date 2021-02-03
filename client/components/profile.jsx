@@ -507,14 +507,14 @@ class Profile extends React.Component {
                 }) : <div className="container mt-5">
                   <div className="row">
                     <div className="col text-center">
-                      <h1>Come on man!</h1>
+                      <h1>Make a post!</h1>
                     </div>
                   </div>
-                  <div className="row">
+                  {/* <div className="row">
                     <div className="col text-center">
-                      <h3>He ain't postin</h3>
+                      <h3>I</h3>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 }
               </div>
