@@ -33,7 +33,7 @@ class SignIn extends React.Component {
 
   signInData() {
     const data = this.state;
-    fetch('http://dev.fuji.social/api/sign-in',
+    fetch('https://dev.fuji.social/api/sign-in',
       {
         method: 'POST',
         headers: {
