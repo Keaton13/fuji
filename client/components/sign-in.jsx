@@ -33,7 +33,7 @@ class SignIn extends React.Component {
 
   signInData() {
     const data = this.state;
-    fetch('http://localhost:3000/api/sign-in',
+    fetch('/api/sign-in',
       {
         method: 'POST',
         headers: {

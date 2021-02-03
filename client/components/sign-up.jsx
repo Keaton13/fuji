@@ -48,7 +48,7 @@ class SignUp extends React.Component {
 
   sendLoginData() {
     const data = this.state;
-    fetch('http://localhost:3000/api/sign-up',
+    fetch('/api/sign-up',
       {
         method: 'POST',
         headers: {
@@ -74,7 +74,7 @@ class SignUp extends React.Component {
     const data = {
       userId: user.userId
     };
-    fetch('http://localhost:3000/api/upload-data',
+    fetch('/api/upload-data',
       {
         method: 'POST',
         headers: {
