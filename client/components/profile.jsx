@@ -480,19 +480,19 @@ class Profile extends React.Component {
                 </div>
               </div>
               <div className="col-6">
-                <button
+                {/* <button
                   name='button'
                   type='button'
                   className='align-center ml-3 widthProfileButton buttonBorderRadius buttonFont'
                   onClick={this.setView}
                 >
                   Message
-                </button>
+                </button> */}
               </div>
             </div>
             <div className='row'>
               <div className="pre-scrollable mh-prescroll w-100" onTouchStart={this.changeSVGDisplay}>
-                {posts.length > 0 ? posts.map(post => {
+                {posts.length > 1 ? posts.map(post => {
                   return (
                     <img
                       src={
