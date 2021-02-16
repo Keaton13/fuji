@@ -164,7 +164,7 @@ class PostHome extends React.Component {
 
   render() {
     console.log(this.state)
-    if (this.state.posts.data !== [] && this.state.commentArray.comments !== null) {
+    if (this.state.posts.data !== null && this.state.commentArray.comments !== null) {
       return (
         <div>
           <Header />
@@ -192,7 +192,7 @@ class PostHome extends React.Component {
             </div>
             <div className='row'>
               <div className='mh-65 pre-scrollable'>
-                <PostSlider posts={this.state.posts.data} handleImageClick={this.handleImageClick}comments={this.state.commentArray.comments}/>
+                {this.state.posts.data.length > 0 ? <PostSlider posts={this.state.posts.data} handleImageClick={this.handleImageClick}comments={this.state.commentArray.comments}/> : <div><h1>Tell your friends to make a post!</h1></div>}
               </div>
             </div>
           </div>
