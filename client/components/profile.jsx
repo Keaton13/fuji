@@ -480,14 +480,14 @@ class Profile extends React.Component {
                 </div>
               </div>
               <div className="col-6">
-                <button
+                {/* <button
                   name='button'
                   type='button'
                   className='align-center ml-3 widthProfileButton buttonBorderRadius buttonFont'
                   onClick={this.setView}
                 >
                   Message
-                </button>
+                </button> */}
               </div>
             </div>
             <div className='row'>
@@ -523,14 +523,14 @@ class Profile extends React.Component {
           <div className="row">
             <AvatarEditorPopup handleImageSave={this.handleImageSave} object={this} profileData={this.state.profileData.data} profilePic={this.state.profilepicurl.pic} />
           </div>
-          <button
+          {/* <button
             name='button'
             type='button'
             className={'align-center widthProfileButton buttonBorderRadius buttonFont blockButtonPosition ' + customClass}
             onClick={this.setView}
           >
             Block
-          </button>
+          </button> */}
         </div>
       );
     } else {
