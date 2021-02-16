@@ -192,7 +192,7 @@ class PostHome extends React.Component {
             </div>
             <div className='row'>
               <div className='mh-65 pre-scrollable'>
-                {this.state.posts.data.length > 0 ? <PostSlider posts={this.state.posts.data} handleImageClick={this.handleImageClick}comments={this.state.commentArray.comments}/> : <div className="col"><h1>Tell your friends to make a post!</h1></div>}
+                {this.state.posts.data.length > 0 ? <PostSlider posts={this.state.posts.data} handleImageClick={this.handleImageClick}comments={this.state.commentArray.comments}/> : <div className="col Mg2"><h1>Tell your friends to make a post!</h1></div>}
               </div>
             </div>
           </div>
