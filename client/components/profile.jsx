@@ -388,7 +388,7 @@ class Profile extends React.Component {
     let button = null;
     let customClass = null;
     let profileImage;
-    console.log(posts.length)
+    console.log(posts)
     if (this.state.display.current === 'hidden') {
       customClass = 'animation2';
     } else {
