@@ -163,6 +163,7 @@ class PostHome extends React.Component {
   }
 
   render() {
+    console.log(this.state)
     if (this.state.posts.data !== null && this.state.commentArray.comments !== null) {
       return (
         <div>
