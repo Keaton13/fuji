@@ -388,6 +388,7 @@ class Profile extends React.Component {
     let button = null;
     let customClass = null;
     let profileImage;
+    console.log(posts.length)
     if (this.state.display.current === 'hidden') {
       customClass = 'animation2';
     } else {
@@ -492,7 +493,7 @@ class Profile extends React.Component {
             </div>
             <div className='row'>
               <div className="pre-scrollable mh-prescroll w-100" onTouchStart={this.changeSVGDisplay}>
-                {posts.length > 1 ? posts.map(post => {
+                {posts.length > 0 ? posts.map(post => {
                   return (
                     <img
                       src={
