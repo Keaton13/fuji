@@ -3,8 +3,6 @@ import Header from './header';
 import Footer from './footer';
 import Switch from 'react-switch';
 import PostSlider from './postSlider';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 class PostHome extends React.Component {
   constructor(props) {
