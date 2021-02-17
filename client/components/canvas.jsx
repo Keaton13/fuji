@@ -202,9 +202,28 @@ const Canvas = props => {
       <div className="row">
         <Header />
       </div>
-      <div className="row">
-        {imageDisplay === 'false' ? <ImagePicker dragUrl={dragUrl} setImageClick={setImageClick} userParams={props.userParams} saveImgSize={saveImgSize} /> : null}
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              {imageDisplay === 'false' ? <ImagePicker dragUrl={dragUrl} setImageClick={setImageClick} userParams={props.userParams} saveImgSize={saveImgSize} /> : null}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
       </div>
+      {/* <div className="row">
+        {imageDisplay === 'false' ? <ImagePicker dragUrl={dragUrl} setImageClick={setImageClick} userParams={props.userParams} saveImgSize={saveImgSize} /> : null}
+      </div> */}
       <div className="row h-75">
         <div
           className="col my-auto padding-0 canvasBorder"
@@ -271,7 +290,7 @@ const Canvas = props => {
                   top: '36%'
                 }}>
                   <div className="btn-group-vertical">
-                    <button type="button" className="btn btn-secondary" onClick={setImageDisplayFunction}>+</button>
+                    <button type="button" className="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" onClick={setImageDisplayFunction}>+</button>
                     <button type="button" className="btn btn-secondary" onClick={setTextDisplayFunction}>T</button>
                     <button type="button" className="btn btn-secondary" onClick={setBrushTypeFunction}><img src={icons} className="width100"></img></button>
                     <button type="button" className="btn btn-secondary" onClick={setColorPickerFunction}><img src="https://dev.fuji.social/images/ColorWheel.png" className="width100"></img></button>
