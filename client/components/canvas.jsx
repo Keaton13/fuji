@@ -213,7 +213,7 @@ const Canvas = props => {
               </button>
             </div>
             <div class="modal-body">
-              {imageDisplay === 'false' ? <ImagePicker dragUrl={dragUrl} setImageClick={setImageClick} userParams={props.userParams} saveImgSize={saveImgSize} /> : <h1>Test</h1>}
+              {imageDisplay === 'false' ? <ImagePicker dragUrl={dragUrl} setImageClick={setImageClick} userParams={props.userParams} saveImgSize={saveImgSize} /> : null}
             </div>
             <div class="modal-footer mx-auto">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={setImageDisplayFunction}>Close</button>
