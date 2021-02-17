@@ -202,9 +202,9 @@ const Canvas = props => {
       <div className="row">
         <Header />
       </div>
-      {/* <div>
+      <div>
         {imageDisplay === 'false' ? <ImagePicker dragUrl={dragUrl} setImageClick={setImageClick} userParams={props.userParams} saveImgSize={saveImgSize} /> : null}
-      </div> */}
+      </div>
       <div className="row h-75">
         <div
           className="col my-auto padding-0 canvasBorder"
