@@ -132,6 +132,7 @@ const Canvas = props => {
     } else {
       setImageDisplay('false');
     }
+    console.log(imageDisplay)
   };
 
   const setTextDisplayFunction = () => {
