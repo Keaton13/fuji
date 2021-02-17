@@ -131,6 +131,7 @@ const Canvas = props => {
       setImageDisplay('true');
     } else {
       setImageDisplay('false');
+      setImageClick(1);
     }
     console.log(imageDisplay)
   };
