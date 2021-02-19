@@ -135,8 +135,12 @@ const Canvas = props => {
     console.log(imageDisplay)
   };
 
-  const changeImageClickNumber = (num) => {
-    setImageClick(num)
+  const changeImageClickNumber = () => {
+    if(imageClick == 0){
+      setImageClick(1)
+    } else {
+      setImageClick(0)
+    }
   }
 
 
@@ -222,7 +226,7 @@ const Canvas = props => {
               {imageDisplay === 'false' ? <ImagePicker dragUrl={dragUrl} setImageClick={setImageClick} userParams={props.userParams} saveImgSize={saveImgSize} /> : null}
             </div>
             <div class="modal-footer mx-auto">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={changeImageClickNumber(1)}>Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={changeImageClickNumber}>Close</button>
             </div>
           </div>
         </div>
