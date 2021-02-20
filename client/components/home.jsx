@@ -118,7 +118,7 @@ class Home extends React.Component {
               </div>
             </div>
             <div className='row d-flex'>
-              <ul className='list-group w-75 mx-auto'>
+              <ul className='list-group w-75 mx-auto mh-66 pre-scrollable'>
                 {filteredUsers.map(user => {
                   return this.renderUsers(user);
                 })}
@@ -161,7 +161,7 @@ class Home extends React.Component {
               </div>
             </div>
             <div className='row d-flex'>
-              <ul className='list-group w-75 mx-auto mh-66 pre-scrollable'></ul>
+              <ul className='list-group w-75 mx-auto'></ul>
             </div>
           </div>
         </div>
