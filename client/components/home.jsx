@@ -161,7 +161,7 @@ class Home extends React.Component {
               </div>
             </div>
             <div className='row d-flex'>
-              <ul className='list-group w-75 mx-auto mh-65 pre-scrollable'></ul>
+              <ul className='list-group w-75 mx-auto mh-66 pre-scrollable'></ul>
             </div>
           </div>
         </div>
