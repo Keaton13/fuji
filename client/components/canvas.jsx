@@ -218,7 +218,7 @@ const Canvas = props => {
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title mx-auto" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={setImageDisplayFunction}>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -226,7 +226,8 @@ const Canvas = props => {
               {imageDisplay === 'false' ? <ImagePicker dragUrl={dragUrl} setImageClick={setImageClick} userParams={props.userParams} saveImgSize={saveImgSize} /> : null}
             </div>
             <div class="modal-footer mx-auto">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={changeImageClickNumber}>Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={changeImageClickNumber}>Clear</button>
             </div>
           </div>
         </div>
