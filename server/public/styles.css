@@ -301,6 +301,11 @@ html, body, #root, .App {
   width: 133px;
   height: 133px;
 }
+.profileImageIntrospect {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
 #addImageContainer{
   height: 10rem;
 }
