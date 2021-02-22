@@ -76,9 +76,11 @@ class Introspect extends React.Component {
             ></img>
           </div>
           <div className="row">
+            <div className="col">
               <button className="btn btn-outline-primary" onClick={this.handleViewChange}>Comment</button>
             </div>
-          <Footer setView={this.props.setView} />
+          </div>
+          {/* <Footer setView={this.props.setView} /> */}
         </div>
       </div>
     );
