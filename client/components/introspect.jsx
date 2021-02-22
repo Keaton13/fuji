@@ -28,7 +28,7 @@ class Introspect extends React.Component {
         postId: this.props.selectedPicture.postId
       }
     });
-    this.grabUserInfo(this.props.selectedPicture.posts.userId)
+    this.grabUserInfo(this.props.selectedPicture.post.userId)
   }
 
   grabUserInfo(userId){
