@@ -509,7 +509,7 @@ class Profile extends React.Component {
                     <div className="col text-center">
                       <h1>Make a post!</h1>
                     </div>
-                  </div>
+                  </div >
                   {/* <div className="row">
                     <div className="col text-center">
                       <h3>I</h3>
