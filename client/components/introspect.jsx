@@ -76,11 +76,11 @@ class Introspect extends React.Component {
         return res.json();
       })
       .then(json => {
-          // this.setState({
-          //   profilePic: {
-          //     image: json.data
-          //   }
-          // });
+          this.setState({
+            profilePic: {
+              image: json.data.profilepicurl
+            }
+          });
           console.log(json)
       })
       .catch(err => {
@@ -120,6 +120,7 @@ class Introspect extends React.Component {
           {/* <Header /> */}
           <div className="row">
             <div className="col float-left">
+            <img className="profileImage" src={this.state.profilePic.image}></img>
               <h5 className="">{'@' + this.state.userName.user}</h5>
             </div>
             <div className="col float-right">
