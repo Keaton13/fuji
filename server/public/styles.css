@@ -105,6 +105,10 @@
   max-height: 530px !important;
 
 }
+.mh-prescroll-2 {
+  max-height: 360px !important;
+
+}
 .mw-25 {
   max-width: 25px;
 }
