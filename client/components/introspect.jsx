@@ -120,7 +120,7 @@ class Introspect extends React.Component {
           {/* <Header /> */}
           <div className="row">
             <div className="col-6 float-left">
-            <img className="profileImage float-left" src={this.state.profilePic.image}></img>
+            <img className="profileImageIntrospect float-left" src={this.state.profilePic.image}></img>
               <h5 className="float-left">{'@' + this.state.userName.user}</h5>
             </div>
             <div className="col-6 float-right">
