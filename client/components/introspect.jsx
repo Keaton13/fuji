@@ -56,8 +56,10 @@ class Introspect extends React.Component {
           user: json.data.userName
         }
       });
-      this.grabUserInfo(userId)
       return json;
+    }).then(data => {
+      this.grabUserInfo(userId)
+      return data
     }).catch(err => {
       console.error(err);
     });
