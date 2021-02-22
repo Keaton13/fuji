@@ -74,10 +74,10 @@ class Introspect extends React.Component {
               className='img-fluid'
               onLoad={this.imgLoad}
             ></img>
-            <div className="col">
+          </div>
+          <div className="row">
               <button className="btn btn-outline-primary" onClick={this.handleViewChange}>Comment</button>
             </div>
-          </div>
           <Footer setView={this.props.setView} />
         </div>
       </div>
