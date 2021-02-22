@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './header';
 import Footer from './footer';
-import { url } from 'inspector';
+// import { url } from 'inspector';
 
 class Introspect extends React.Component {
   constructor(props) {
