@@ -110,9 +110,11 @@
 }
 .mh-65{
   max-height: 55vh !important;
+  overflow-x: hidden;
 }
 .mh-66{
   max-height: 50vh !important;
+  overflow-x: hidden;
 }
 .w-35{
   width: 35%
