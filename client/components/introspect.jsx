@@ -12,6 +12,9 @@ class Introspect extends React.Component {
       },
       dimensions: {
         height: null
+      },
+      userName: {
+        user: null
       }
     };
     console.log(this.props)
@@ -31,7 +34,7 @@ class Introspect extends React.Component {
     this.grabUserInfo(this.props.selectedPicture.post.userId)
   }
 
-  grabUserInfo(userId){
+  grabUserInfo(userId) {
     fetch(`https://dev.fuji.social/api/grabUserInfo/${userId}`, {
       method: 'get',
       headers: {
@@ -43,17 +46,17 @@ class Introspect extends React.Component {
       console.log(json);
       let username = json.data.userName;
       console.log(username)
-      // this.setState({
-      //   posts: {
-      //     urls: json.data
-      //   }
-      // });
+      this.setState({
+        userName: {
+          user: json.data.userName
+        }
+      });
       return json;
     }).catch(err => {
       console.error(err);
     });
   }
-  
+
   setView(text) {
     if (text === 'canvas') {
       this.props.setView('canvas');
@@ -85,14 +88,22 @@ class Introspect extends React.Component {
         <div className='container vh-100'>
           {/* <Header /> */}
           <div className="row">
-            <button
+            <div className="col float-left">
+              <h5 className="">{this.state.userName.user}</h5>
+            </div>
+            <div className="col float-right">
+              <button type="button" class="close" aria-label="Close" onClick={this.setView}>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {/* <button
               name='button'
               type='button'
               className='btn btn-outline-primary align-center w-100'
               onClick={this.setView}
             >
               Back
-            </button>
+            </button> */}
           </div>
           <div className='row h-75 align-items-center text-center'>
             <img
