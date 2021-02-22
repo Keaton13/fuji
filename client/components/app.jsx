@@ -31,7 +31,8 @@ export default class App extends React.Component {
       },
       selectedPicture: {
         url: null,
-        postId: null
+        postId: null,
+        post: null
       },
       selectedPictureHeight: {
         height: null
@@ -82,11 +83,12 @@ export default class App extends React.Component {
     });
   }
 
-  saveSelectedPicture(url, postId) {
+  saveSelectedPicture(url, postId, post) {
     this.setState({
       selectedPicture: {
         url: url,
-        postId: postId
+        postId: postId,
+        post: post
       }
     });
   }

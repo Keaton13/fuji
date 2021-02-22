@@ -56,7 +56,7 @@ class PostHome extends React.Component {
   handleImageClick(url, postId) {
     if (url) {
       try {
-        this.props.saveSelectedPicture(url, postId);
+        this.props.saveSelectedPicture(url, postId, post);
         this.props.setView('introspect');
       } catch (err) {
         console.err(err);

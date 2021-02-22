@@ -14,6 +14,7 @@ class Introspect extends React.Component {
         height: null
       }
     };
+    console.log(this.props)
     this.setView = this.setView.bind(this);
     this.imgLoad = this.imgLoad.bind(this);
     this.handleViewChange = this.handleViewChange.bind(this);
