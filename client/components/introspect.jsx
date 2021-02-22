@@ -76,12 +76,12 @@ class Introspect extends React.Component {
         return res.json();
       })
       .then(json => {
-        this.setState({
-          profilePic: {
-            image: json.data.profilepicurl
-          }
-        });
-        console.log(json)
+          this.setState({
+            profilePic: {
+              image: json.data.profilepicurl
+            }
+          });
+          console.log(json)
       })
       .catch(err => {
         console.error(err);
@@ -119,11 +119,9 @@ class Introspect extends React.Component {
         <div className='container vh-100'>
           {/* <Header /> */}
           <div className="row">
-            <div className="col float-left">
-              <img className="profileImageIntrospect" src={this.state.profilePic.image}></img>
-            </div>
-            <div className="col float-left">
-              <h5 className="">{'@' + this.state.userName.user}</h5>
+            <div className="col-6 float-left">
+            <img className="profileImage float-left" src={this.state.profilePic.image}></img>
+              <h5 className="float-left">{'@' + this.state.userName.user}</h5>
             </div>
             <div className="col-6 float-right">
               <button type="button" class="close" aria-label="Close" onClick={this.setView}>
