@@ -53,8 +53,7 @@ class Introspect extends React.Component {
       console.error(err);
     });
   }
-  }
-
+  
   setView(text) {
     if (text === 'canvas') {
       this.props.setView('canvas');
