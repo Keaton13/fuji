@@ -18,6 +18,7 @@ class Introspect extends React.Component {
     this.setView = this.setView.bind(this);
     this.imgLoad = this.imgLoad.bind(this);
     this.handleViewChange = this.handleViewChange.bind(this);
+    this.grabUserInfo = this.grabUserInfo.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +28,31 @@ class Introspect extends React.Component {
         postId: this.props.selectedPicture.postId
       }
     });
+    this.grabUserInfo(this.props.selectedPicture.posts.userId)
+  }
+
+  grabUserInfo(userId){
+    fetch(`https://dev.fuji.social/api/grabUserInfo/${userId}`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }).then(res => {
+      return res.json();
+    }).then(json => {
+      console.log(json);
+      let username = json.data.userName;
+      console.log(username)
+      // this.setState({
+      //   posts: {
+      //     urls: json.data
+      //   }
+      // });
+      return json;
+    }).catch(err => {
+      console.error(err);
+    });
+  }
   }
 
   setView(text) {
