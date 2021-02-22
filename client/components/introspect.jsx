@@ -121,7 +121,7 @@ class Introspect extends React.Component {
           <div className="row">
             <div className="col-6 float-left">
             <img className="profileImageIntrospect float-left" src={this.state.profilePic.image}></img>
-              <h5 className="float-left">{'@' + this.state.userName.user}</h5>
+              <h5 className="float-left mt-2 mb-0">{'@' + this.state.userName.user}</h5>
             </div>
             <div className="col-6 float-right">
               <button type="button" class="close" aria-label="Close" onClick={this.setView}>
