@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './header';
 import Footer from './footer';
+import { url } from 'inspector';
 
 class Introspect extends React.Component {
   constructor(props) {
@@ -15,6 +16,9 @@ class Introspect extends React.Component {
       },
       userName: {
         user: null
+      },
+      profilePic: {
+        image: null
       }
     };
     console.log(this.props)
@@ -22,6 +26,7 @@ class Introspect extends React.Component {
     this.imgLoad = this.imgLoad.bind(this);
     this.handleViewChange = this.handleViewChange.bind(this);
     this.grabUserInfo = this.grabUserInfo.bind(this);
+    this.grabProfileData = this.grabProfileData.bind(this);
   }
 
   componentDidMount() {
@@ -51,10 +56,34 @@ class Introspect extends React.Component {
           user: json.data.userName
         }
       });
+      this.grabUserInfo(userId)
       return json;
     }).catch(err => {
       console.error(err);
     });
+  }
+
+  grabProfileData(userId) {
+    fetch(`https://dev.fuji.social/api/profileData/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+          // this.setState({
+          //   profilePic: {
+          //     image: json.data
+          //   }
+          // });
+          console.log(json)
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   setView(text) {
@@ -89,7 +118,7 @@ class Introspect extends React.Component {
           {/* <Header /> */}
           <div className="row">
             <div className="col float-left">
-              <h5 className="">{this.state.userName.user}</h5>
+              <h5 className="">{'@' + this.state.userName.user}</h5>
             </div>
             <div className="col float-right">
               <button type="button" class="close" aria-label="Close" onClick={this.setView}>
