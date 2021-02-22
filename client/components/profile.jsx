@@ -55,10 +55,10 @@ class Profile extends React.Component {
     }
   }
 
-  handleImageClick(url) {
+  handleImageClick(url, postId, post) {
     if (url) {
       try {
-        this.props.saveSelectedPicture(url);
+        this.props.saveSelectedPicture(url,postId,post);
         this.props.setView('introspect');
       } catch (err) {
         console.err(err);
@@ -501,7 +501,7 @@ class Profile extends React.Component {
                       }
                       key={post.postId}
                       className='mw-100 mb-1'
-                      onClick={() => { this.handleImageClick(post.pictureUrl); }}
+                      onClick={() => { this.handleImageClick(post.pictureUrl,post.id, post); }}
                     ></img>
                   );
                 }) : <div className="container mt-5">
