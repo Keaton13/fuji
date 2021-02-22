@@ -490,7 +490,7 @@ class Profile extends React.Component {
                 </button> */}
               </div>
             </div>
-            <div className='row'>
+            <div className='row mh-selectImage'>
               <div className="pre-scrollable mh-prescroll w-100" onTouchStart={this.changeSVGDisplay}>
                 {posts.length > 0 ? posts.map(post => {
                   return (
