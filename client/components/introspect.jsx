@@ -57,7 +57,7 @@ class Introspect extends React.Component {
     return (
       <div>
         <div className='container vh-100'>
-          <Header />
+          {/* <Header /> */}
           <div className="row">
             <button
               name='button'
