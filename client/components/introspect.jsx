@@ -76,7 +76,7 @@ class Introspect extends React.Component {
             ></img>
           </div>
           <div className="row">
-            <div className="col">
+            <div className="col text-center">
               <button className="btn btn-outline-primary" onClick={this.handleViewChange}>Comment</button>
             </div>
           </div>
