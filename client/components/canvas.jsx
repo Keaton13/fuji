@@ -132,7 +132,18 @@ const Canvas = props => {
     } else {
       setImageDisplay('false');
     }
+    console.log(imageDisplay)
   };
+
+  const changeImageClickNumber = () => {
+    if(imageClick == 0){
+      setImageClick(1)
+    } else {
+      setImageClick(0)
+    }
+  }
+
+
 
   const setTextDisplayFunction = () => {
     if (inputDisplay === 'false') {
@@ -202,7 +213,26 @@ const Canvas = props => {
       <div className="row">
         <Header />
       </div>
-      {/* <div>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" onClick={setImageDisplayFunction}>
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title mx-auto" id="exampleModalLabel">Select Image</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" onClick={setImageDisplayFunction}>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              {imageDisplay === 'false' ? <ImagePicker dragUrl={dragUrl} setImageClick={setImageClick} userParams={props.userParams} saveImgSize={saveImgSize} /> : <h1>No posts to view</h1>}
+            </div>
+            <div class="modal-footer mx-auto">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick={changeImageClickNumber}>Clear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <div className="row">
         {imageDisplay === 'false' ? <ImagePicker dragUrl={dragUrl} setImageClick={setImageClick} userParams={props.userParams} saveImgSize={saveImgSize} /> : null}
       </div> */}
       <div className="row h-75">
@@ -271,7 +301,7 @@ const Canvas = props => {
                   top: '36%'
                 }}>
                   <div className="btn-group-vertical">
-                    <button type="button" className="btn btn-secondary" onClick={setImageDisplayFunction}>+</button>
+                    <button type="button" className="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" onClick={setImageDisplayFunction}>+</button>
                     <button type="button" className="btn btn-secondary" onClick={setTextDisplayFunction}>T</button>
                     <button type="button" className="btn btn-secondary" onClick={setBrushTypeFunction}><img src={icons} className="width100"></img></button>
                     <button type="button" className="btn btn-secondary" onClick={setColorPickerFunction}><img src="https://dev.fuji.social/images/ColorWheel.png" className="width100"></img></button>

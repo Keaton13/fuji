@@ -45,7 +45,7 @@ class ImagePicker extends React.Component {
 
   render() {
     const settings = {
-      dots: true,
+      dots: false,
       arrows: false,
       infinite: true,
       speed: 500,

@@ -95,7 +95,7 @@
   min-height: 250px;
 }
 .mh-imagePicker {
-  max-height: 100px
+  max-height: 175px
 }
 .mh-selectImage {
   max-height: 360px;
@@ -105,11 +105,20 @@
   max-height: 530px !important;
 
 }
+.mh-prescroll-2 {
+  max-height: 360px !important;
+
+}
 .mw-25 {
   max-width: 25px;
 }
 .mh-65{
-  max-height: 70vh !important;
+  max-height: 55vh !important;
+  overflow-x: hidden;
+}
+.mh-66{
+  max-height: 50vh !important;
+  overflow-x: hidden;
 }
 .w-35{
   width: 35%
@@ -291,6 +300,11 @@ html, body, #root, .App {
   border-radius: 50%;
   width: 133px;
   height: 133px;
+}
+.profileImageIntrospect {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }
 #addImageContainer{
   height: 10rem;

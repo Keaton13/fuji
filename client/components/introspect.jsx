@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './header';
 import Footer from './footer';
+// import { url } from 'inspector';
 
 class Introspect extends React.Component {
   constructor(props) {
@@ -12,11 +13,20 @@ class Introspect extends React.Component {
       },
       dimensions: {
         height: null
+      },
+      userName: {
+        user: null
+      },
+      profilePic: {
+        image: null
       }
     };
+    console.log(this.props)
     this.setView = this.setView.bind(this);
     this.imgLoad = this.imgLoad.bind(this);
     this.handleViewChange = this.handleViewChange.bind(this);
+    this.grabUserInfo = this.grabUserInfo.bind(this);
+    this.grabProfileData = this.grabProfileData.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +36,56 @@ class Introspect extends React.Component {
         postId: this.props.selectedPicture.postId
       }
     });
+    this.grabUserInfo(this.props.selectedPicture.post.userId)
+  }
+
+  grabUserInfo(userId) {
+    fetch(`https://dev.fuji.social/api/grabUserInfo/${userId}`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }).then(res => {
+      return res.json();
+    }).then(json => {
+      console.log(json);
+      let username = json.data.userName;
+      console.log(username)
+      this.setState({
+        userName: {
+          user: json.data.userName
+        }
+      });
+      return json;
+    }).then(data => {
+      this.grabProfileData(userId)
+      return data
+    }).catch(err => {
+      console.error(err);
+    });
+  }
+
+  grabProfileData(userId) {
+    fetch(`https://dev.fuji.social/api/profileData/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(json => {
+          this.setState({
+            profilePic: {
+              image: json.data.profilepicurl
+            }
+          });
+          console.log(json)
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 
   setView(text) {
@@ -57,16 +117,25 @@ class Introspect extends React.Component {
     return (
       <div>
         <div className='container vh-100'>
-          <Header />
-          <div className="row">
-            <button
+          {/* <Header /> */}
+          <div className="row mt-3">
+            <div className="col-6 float-left">
+            <img className="profileImageIntrospect float-left" src={this.state.profilePic.image}></img>
+              <h5 className="float-left mt-2 mb-0">{'@' + this.state.userName.user}</h5>
+            </div>
+            <div className="col-6 float-right">
+              <button type="button" class="close" aria-label="Close" onClick={this.setView}>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            {/* <button
               name='button'
               type='button'
               className='btn btn-outline-primary align-center w-100'
               onClick={this.setView}
             >
               Back
-            </button>
+            </button> */}
           </div>
           <div className='row h-75 align-items-center text-center'>
             <img
@@ -74,11 +143,13 @@ class Introspect extends React.Component {
               className='img-fluid'
               onLoad={this.imgLoad}
             ></img>
-            <div className="col">
+          </div>
+          <div className="row">
+            <div className="col text-center">
               <button className="btn btn-outline-primary" onClick={this.handleViewChange}>Comment</button>
             </div>
           </div>
-          <Footer setView={this.props.setView} />
+          {/* <Footer setView={this.props.setView} /> */}
         </div>
       </div>
     );

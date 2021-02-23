@@ -34,7 +34,7 @@ class PostSlider extends React.Component {
                   }
                   key={post.postId}
                   className='mw-100 minWidth100 mb-1'
-                  onClick={() => { this.props.handleImageClick(post.pictureUrl, post.postId); }}
+                  onClick={() => { this.props.handleImageClick(post.pictureUrl, post.postId, post); }}
                 ></img>
               </div>
               {comments.map(comment => {

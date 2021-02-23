@@ -55,10 +55,10 @@ class Profile extends React.Component {
     }
   }
 
-  handleImageClick(url) {
+  handleImageClick(url, postId, post) {
     if (url) {
       try {
-        this.props.saveSelectedPicture(url);
+        this.props.saveSelectedPicture(url,postId,post);
         this.props.setView('introspect');
       } catch (err) {
         console.err(err);
@@ -480,18 +480,18 @@ class Profile extends React.Component {
                 </div>
               </div>
               <div className="col-6">
-                <button
+                {/* <button
                   name='button'
                   type='button'
                   className='align-center ml-3 widthProfileButton buttonBorderRadius buttonFont'
                   onClick={this.setView}
                 >
                   Message
-                </button>
+                </button> */}
               </div>
             </div>
-            <div className='row'>
-              <div className="pre-scrollable mh-prescroll w-100" onTouchStart={this.changeSVGDisplay}>
+            <div className='row mh-selectImage'>
+              <div className="pre-scrollable mh-prescroll-2 w-100" onTouchStart={this.changeSVGDisplay}>
                 {posts.length > 0 ? posts.map(post => {
                   return (
                     <img
@@ -501,7 +501,7 @@ class Profile extends React.Component {
                       }
                       key={post.postId}
                       className='mw-100 mb-1'
-                      onClick={() => { this.handleImageClick(post.pictureUrl); }}
+                      onClick={() => { this.handleImageClick(post.pictureUrl,post.id, post); }}
                     ></img>
                   );
                 }) : <div className="container mt-5">
@@ -509,7 +509,7 @@ class Profile extends React.Component {
                     <div className="col text-center">
                       <h1>Make a post!</h1>
                     </div>
-                  </div>
+                  </div >
                   {/* <div className="row">
                     <div className="col text-center">
                       <h3>I</h3>
@@ -523,14 +523,14 @@ class Profile extends React.Component {
           <div className="row">
             <AvatarEditorPopup handleImageSave={this.handleImageSave} object={this} profileData={this.state.profileData.data} profilePic={this.state.profilepicurl.pic} />
           </div>
-          <button
+          {/* <button
             name='button'
             type='button'
             className={'align-center widthProfileButton buttonBorderRadius buttonFont blockButtonPosition ' + customClass}
             onClick={this.setView}
           >
             Block
-          </button>
+          </button> */}
         </div>
       );
     } else {
