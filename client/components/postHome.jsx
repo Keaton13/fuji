@@ -3,6 +3,7 @@ import Header from './header';
 import Footer from './footer';
 import Switch from 'react-switch';
 import PostSlider from './postSlider';
+import Loading from './loading'
 
 class PostHome extends React.Component {
   constructor(props) {
@@ -200,7 +201,7 @@ class PostHome extends React.Component {
         </div>
       );
     } else {
-      return <div>Loading....</div>;
+      return <Loading />
     }
   }
 }
