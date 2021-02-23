@@ -7,7 +7,12 @@ class Loading extends React.Component {
     }
     render() {
         return (
-            <div className="lds-ring"><div></div><div></div><div></div><div></div></div>)
+            <div className="contianer">
+                <div className="row">
+                    <div className="lds-ring"><div></div><div></div><div></div><div></div></div>)
+                    <h1 className="text-center fuji-Font float-left mt-2 ml-2">fuji</h1>
+                </div>
+            </div>
     }
 }
 
