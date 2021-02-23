@@ -9,6 +9,7 @@ import Footer from './footer';
 import PostHome from './postHome';
 import Introspect from './introspect';
 import Canvas from './canvas';
+import Loading from './loading';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -111,7 +112,7 @@ export default class App extends React.Component {
 
   render() {
     if (this.state.isLoading) {
-      return <h1>Testing Connections...</h1>;
+      return <Loading />
     } else {
       let view;
       if (this.state.view.name === 'sign-up') {
