@@ -317,6 +317,8 @@ html, body, #root, .App {
   position: relative;
   width: 55%;
   height: 31%;
+  margin-left: 22%;
+  margin-top: 25%;
 }
 .lds-ring div {
   margin-left: 22% !important;
@@ -326,8 +328,8 @@ html, body, #root, .App {
   box-sizing: border-box;
   display: block;
   position: absolute;
-  width: 64px;
-  height: 64px;
+  width: 200px;
+  height: 200px;
   margin: 8px;
   border: 8px solid #000;
   border-radius: 50%;
