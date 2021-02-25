@@ -314,16 +314,16 @@ html, body, #root, .App {
 }
 .lds-ring {
   display: inline-block;
-  position: relative;
+  position: absolute;
   width: 57%;
   height: 39%;
-  margin-left: 22%;
-  margin-top: 50%;
+  margin-left: 80px;
+  margin-top: 190px;
 }
 .fujiLoading {
   position: absolute;
-  top: 40%;
-  left: 40%;
+  top: 260px;
+  left: 150px;
 }
 .lds-ring div {
   box-sizing: border-box;
