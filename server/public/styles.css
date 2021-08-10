@@ -322,18 +322,26 @@ html, body, #root, .App {
 .canvasBorder {
   border: 1px solid grey;
 }
+/* .lds-ring {
+  display: inline-block;
+  position: absolute;
+  width: 55%;
+  height: 25%;
+  margin-left: 80px;
+  margin-top: 190px;
+} */
 .lds-ring {
   display: inline-block;
   position: absolute;
-  width: 57%;
-  height: 39%;
-  margin-left: 80px;
-  margin-top: 190px;
+  width: 55%;
+  height: 25%;
+  margin-left: 25%;
+  margin-top: 45%;
 }
 .fujiLoading {
   position: absolute;
-  top: 260px;
-  left: 150px;
+  top: 28%;
+  left: 40%;
 }
 .lds-ring div {
   box-sizing: border-box;
