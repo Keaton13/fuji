@@ -21,7 +21,7 @@ class Footer extends React.Component {
 
   render() {
     return (
-      <div className='container fixed-bottom'>
+      <div className='container fixed-bottom footerAlignment'>
         <div className='row'>
           <div className='col text-center'>
             <img src={createImage} className="w-35 mb-2" onClick={() => this.handleSetView('select-image')}></img>

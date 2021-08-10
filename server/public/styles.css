@@ -101,6 +101,10 @@
   max-height: 360px;
   margin: auto;
 }
+.custom-prescroll {
+  max-height: 70vh;
+  overflow-y: scroll;
+}
 .mh-prescroll {
   max-height: 530px !important;
 
