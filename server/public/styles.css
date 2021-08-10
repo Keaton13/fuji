@@ -335,13 +335,13 @@ html, body, #root, .App {
   position: absolute;
   width: 55%;
   height: 25%;
-  margin-left: 25%;
+  margin-left: 23%;
   margin-top: 45%;
 }
 .fujiLoading {
   position: absolute;
-  top: 28%;
-  left: 40%;
+  margin-top: 64%;
+  margin-left: 43%;
 }
 .lds-ring div {
   box-sizing: border-box;

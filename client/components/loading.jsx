@@ -10,7 +10,7 @@ class Loading extends React.Component {
             <div className="container h-100">
                 <div className="row h-75">
                     <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
-                    <h1 className="text-center fuji-Font float-left mt-2 ml-2 fujiLoading">fuji</h1>
+                    <h1 className="text-center fuji-Font mb-0 fujiLoading">fuji</h1>
                 </div>
                 <div>
 
