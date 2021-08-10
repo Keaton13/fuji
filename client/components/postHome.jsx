@@ -191,8 +191,8 @@ class PostHome extends React.Component {
                 </div>
               </div>
             </div>
-            <div className='row '>
-              <div className='col'>
+            <div className='row custom-prescroll'>
+              <div className=''>
                 {this.state.posts.data.length > 0 ? <PostSlider posts={this.state.posts.data} handleImageClick={this.handleImageClick}comments={this.state.commentArray.comments}/> : <div className="col Mg2"><h1>Tell your friends to make a post!</h1></div>}
               </div>
             </div>
