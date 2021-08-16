@@ -378,7 +378,16 @@ html, body, #root, .App {
 @media only screen and (max-width: 400px) {
   .fujiLoading {
     /* position: absolute; */
-    margin-top: 40%;
+    margin-top: 35%;
+    /* margin-left: 40%; */
+    /* width: 215px; */
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  .fujiLoading {
+    /* position: absolute; */
+    margin-top: 35% !important;
     /* margin-left: 40%; */
     /* width: 215px; */
   }
