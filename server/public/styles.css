@@ -340,8 +340,8 @@ html, body, #root, .App {
 }
 .fujiLoading {
   position: absolute;
-  margin-top: 64%;
-  margin-left: 43%;
+  margin-top: 40%;
+  margin-left: 40%;
 }
 .lds-ring div {
   box-sizing: border-box;
