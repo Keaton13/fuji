@@ -24,8 +24,37 @@
 - React Color
 ## Features
 ---
+- Users can sign-up
+- Users can login
 - Users can post Pictures or videos
 - Users can comment on others posts via sketchpad
->- Users can comment with drawing, text or previous posts
 - Users can follow other users
 - Users can change profile picture
+
+## Preview
+---
+>Sign-up
+
+![](./preview/Fuji-sign-in-2.gif)
+> ---
+>Login
+
+![](./preview/Fuji-sign-in-real.gif)
+> ---
+>User can post images
+
+![](./preview/Fuji-User-can-Post-Images.gif)
+> ---
+>User can comment on posts with images
+
+![](./preview/Fuji-User-can-Comment-On-Post-With-Pictures.gif)
+> ---
+>User can follow other users
+
+![](./preview/Fuji-User-can-Follow-Other-Users.gif)
+> ---
+>User can change profile picture
+
+![](./preview/Fuji-User-can-Change-Profile-Picture.gif)
+> 
+
