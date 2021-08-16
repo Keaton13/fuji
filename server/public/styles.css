@@ -333,15 +333,15 @@ html, body, #root, .App {
 .lds-ring {
   display: inline-block;
   position: absolute;
-  width: 55%;
+  width: 50%;
   height: 25%;
-  margin-left: 23%;
+  margin: auto;
   margin-top: 45%;
 }
 .fujiLoading {
-  position: absolute;
-  margin-top: 40%;
-  margin-left: 40%;
+  /* position: absolute; */
+  margin-top: 35%;
+  margin: auto;
 }
 .lds-ring div {
   box-sizing: border-box;
@@ -372,5 +372,13 @@ html, body, #root, .App {
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .fujiLoading {
+    position: absolute;
+    margin-top: 40%;
+    margin-left: 40%;
   }
 }
