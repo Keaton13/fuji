@@ -331,8 +331,8 @@ html, body, #root, .App {
   margin-top: 190px;
 } */
 .lds-ring {
-  display: inline-block;
-  position: absolute;
+  /* display: inline-block;
+  position: absolute; */
   width: 50%;
   height: 25%;
   margin: auto;
