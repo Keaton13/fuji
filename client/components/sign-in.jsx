@@ -57,7 +57,7 @@ class SignIn extends React.Component {
   render() {
     return (
       <div>
-        <Header />,
+        <Header />
         <div className='container'>
           <form>
             <div className='form-group'>
