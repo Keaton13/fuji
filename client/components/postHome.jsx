@@ -3,6 +3,7 @@ import Header from './header';
 import Footer from './footer';
 import Switch from 'react-switch';
 import PostSlider from './postSlider';
+import Loading from './loading';
 
 class PostHome extends React.Component {
   constructor(props) {
@@ -163,7 +164,7 @@ class PostHome extends React.Component {
   }
 
   render() {
-    console.log(this.state)
+    console.log(this.state);
     if (this.state.posts.data !== null && this.state.commentArray.comments !== null) {
       return (
         <div>
@@ -190,8 +191,8 @@ class PostHome extends React.Component {
                 </div>
               </div>
             </div>
-            <div className='row'>
-              <div className='mh-65 pre-scrollable'>
+            <div className='row custom-prescroll'>
+              <div className=''>
                 {this.state.posts.data.length > 0 ? <PostSlider posts={this.state.posts.data} handleImageClick={this.handleImageClick}comments={this.state.commentArray.comments}/> : <div className="col Mg2"><h1>Tell your friends to make a post!</h1></div>}
               </div>
             </div>
@@ -200,7 +201,7 @@ class PostHome extends React.Component {
         </div>
       );
     } else {
-      return <div>Loading....</div>;
+      return <Loading />;
     }
   }
 }

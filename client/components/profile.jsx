@@ -1,6 +1,6 @@
 import React from 'react';
 import AvatarEditorPopup from './avatarEditorPopup';
-
+import Loading from './loading'
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -490,8 +490,8 @@ class Profile extends React.Component {
                 </button> */}
               </div>
             </div>
-            <div className='row mh-selectImage'>
-              <div className="pre-scrollable mh-prescroll-2 w-100" onTouchStart={this.changeSVGDisplay}>
+            <div className='row m-auto'>
+              <div className="custom-prescroll w-100" onTouchStart={this.changeSVGDisplay}>
                 {posts.length > 0 ? posts.map(post => {
                   return (
                     <img
@@ -534,7 +534,7 @@ class Profile extends React.Component {
         </div>
       );
     } else {
-      return <div>Loading....</div>;
+      return <Loading />
     }
   }
 }

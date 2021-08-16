@@ -1,18 +1,60 @@
-# fuji
-A web application for sharing images
+# Fuji 
+---
+ A sandbox image sharing application that gives users creative freedom with there content
 
-Starter files and guidance for building a full stack web application in JavaScript.
+## live Demo
+>[dev.fuji.social](dev.fuji.social)
 
-The guides cover the following topics:
+## Technologies Used
+---
+- React.Js
+- Node.Js
+- Express
+- Postgresql
+- AWS EC2
+- Postgresql
+## Dependencies Used
+---
+- React Slick
+- Slick-carousel
+- Konva.Js
+- React Avatar Editor
+- React Rounded Image
+- React Switch
+- React Color
+## Features
+---
+- Users can sign-up
+- Users can login
+- Users can post Pictures or videos
+- Users can comment on others posts via sketchpad
+- Users can follow other users
+- Users can change profile picture
 
-1. [Getting Started](guides/GETTING_STARTED.md)
-1. [Team Meetings](guides/TEAM_MEETINGS.md)
-1. [Full Stack Development Workflow](guides/FULL_STACK_WORKFLOW.md)
-1. [Deployment to EC2 on AWS](guides/DEPLOYMENT.md)
-1. [Presentations](guides/PRESENTING.md)
+## Preview
+---
+>Sign-up
 
-Project Managers (LearningFuze staff) and Developers (LearningFuze students) will be using these guides when delivering project features and conducting team meetings.
+![](./preview/Fuji-sign-in-2.gif)
+> ---
+>Login
 
-Congratulations on making it this far! There is work left to be done, but these guides aim to start you off on solid footing and help you maintain good velocity throughout the project.
+![](./preview/Fuji-sign-in-real.gif)
+> ---
+>User can post images
 
-Good luck!
+![](./preview/Fuji-User-can-Post-Images.gif)
+> ---
+>User can comment on posts with images
+
+![](./preview/Fuji-User-can-Comment-On-Post-With-Pictures.gif)
+> ---
+>User can follow other users
+
+![](./preview/Fuji-User-can-Follow-Other-Users.gif)
+> ---
+>User can change profile picture
+
+![](./preview/Fuji-User-can-Change-Profile-Picture.gif)
+> 
+
