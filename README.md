@@ -3,7 +3,7 @@
  A sandbox image sharing application that gives users creative freedom with there content
 
 ## live Demo
->[dev.fuji.social](dev.fuji.social)
+>[dev.fuji.social](https://dev.fuji.social/)
 
 ## Technologies Used
 ---
