@@ -125,10 +125,9 @@ export default class App extends React.Component {
     let view;
     if (this.state.isLoading) {
       return <Loading />
-    } else {
-      if (this.state.width.width < 1024) {
+    } else if (this.state.width.width > 1024) {
         view = <Mobile />
-      } else {
+    } else {
         if (this.state.view.name === 'sign-up') {
           view = <SignUp setView={this.setView} saveUserData={this.saveUserData} />;
         } else if (this.state.view.name === 'sign-in') {
@@ -160,4 +159,3 @@ export default class App extends React.Component {
       );
     }
   }
-}
