@@ -1,20 +1,17 @@
 import React from 'react';
-import Header from './header'
+
 class MobileError extends React.Component {
     render() {
         return (
-            <div>
-                <Header />
-                <div className="container m-auto">
+                <div className="container m-auto backgroundImage2">
                     <div className="row m-auto">
                         <div className="col m-auto">
-                            <div class="modal-dialog modal-dialog-centered">
-                                Please view app with a mobile device -_-
+                            <div class="modal-dialog modal-dialog-centered text-center">
+                                <h1>Please view app with a mobile device -_-</h1>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         )
     }
 }
