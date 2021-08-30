@@ -40,7 +40,9 @@ export default class App extends React.Component {
       },
       followers: {
         data: null
-      }
+      },
+      width: null
+    
     };
     this.setView = this.setView.bind(this);
     this.saveUserData = this.saveUserData.bind(this);
@@ -56,7 +58,12 @@ export default class App extends React.Component {
       .then(data => this.setState({ message: data.message || data.error }))
       .catch(err => this.setState({ message: err.message }))
       .finally(() => this.setState({ isLoading: false }));
+      this.setState({width:{
+        width: window.innerWidth + 'px'
+      }});
+
   }
+
 
   setView(view) {
     this.setState({
@@ -111,6 +118,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.width)
     if (this.state.isLoading) {
       return <Loading />
     } else {
