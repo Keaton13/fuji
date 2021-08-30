@@ -126,7 +126,7 @@ export default class App extends React.Component {
     if (this.state.isLoading) {
       return <Loading />
     } else {
-      if (this.state.width < 1024) {
+      if (this.state.width.width < 1024) {
         view = <Mobile />
       } else {
         if (this.state.view.name === 'sign-up') {
