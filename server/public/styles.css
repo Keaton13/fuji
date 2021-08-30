@@ -367,6 +367,15 @@ html, body, #root, .App {
 .lds-ring div:nth-child(3) {
   animation-delay: -0.15s;
 }
+
+.backgroundImage2 {
+  background-image: url(../public/images/90-902257_black-and-white-mountain.jpg);
+  backgroundPosition: 'center';
+  backgroundSize: 'cover';
+  backgroundRepeat: 'no-repeat';
+  width: '100vw';
+  height: '100vh';
+}
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);
