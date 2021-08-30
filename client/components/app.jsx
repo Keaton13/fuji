@@ -10,6 +10,7 @@ import PostHome from './postHome';
 import Introspect from './introspect';
 import Canvas from './canvas';
 import Loading from './loading';
+import Mobile from './mobile'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -59,7 +60,7 @@ export default class App extends React.Component {
       .catch(err => this.setState({ message: err.message }))
       .finally(() => this.setState({ isLoading: false }));
       this.setState({width:{
-        width: window.innerWidth + 'px'
+        width: window.innerWidth
       }});
 
   }
@@ -119,10 +120,12 @@ export default class App extends React.Component {
 
   render() {
     console.log(this.state.width)
+     let view;
     if (this.state.isLoading) {
       return <Loading />
+    } else if (this.state.width.width < 1024) {
+        view = <Mobile />
     } else {
-      let view;
       if (this.state.view.name === 'sign-up') {
         view = <SignUp setView={this.setView} saveUserData={this.saveUserData}/>;
       } else if (this.state.view.name === 'sign-in') {
