@@ -43,7 +43,7 @@ export default class App extends React.Component {
         data: null
       },
       width: null
-    
+
     };
     this.setView = this.setView.bind(this);
     this.saveUserData = this.saveUserData.bind(this);
@@ -59,9 +59,11 @@ export default class App extends React.Component {
       .then(data => this.setState({ message: data.message || data.error }))
       .catch(err => this.setState({ message: err.message }))
       .finally(() => this.setState({ isLoading: false }));
-      this.setState({width:{
+    this.setState({
+      width: {
         width: window.innerWidth
-      }});
+      }
+    });
 
   }
 
@@ -120,38 +122,40 @@ export default class App extends React.Component {
 
   render() {
     console.log(this.state.width)
-     let view;
+    let view;
     if (this.state.isLoading) {
       return <Loading />
-    } else if (this.state.width < 1024) {
-        view = <Mobile />
     } else {
-      if (this.state.view.name === 'sign-up') {
-        view = <SignUp setView={this.setView} saveUserData={this.saveUserData}/>;
-      } else if (this.state.view.name === 'sign-in') {
-        view = <SignIn setView={this.setView} saveUserData={this.saveUserData}/>;
-      } else if (this.state.view.name === 'home') {
-        view = <Home setView={this.setView} userParams={this.state.userParams} saveSelectedData={this.saveSelectedData}/>;
-      } else if (this.state.view.name === 'profile') {
-        view = <Profile setView={this.setView} userParams={this.state.userParams} saveUsersFollowers={this.saveUsersFollowers} saveSelectedPicture={this.saveSelectedPicture} selectedUserParams={this.state.selectedUserParams} saveSelectedData={this.saveSelectedData} previousView={this.state.previousView} followers={this.state.followers}/>;
-      } else if (this.state.view.name === 'sign-up2') {
-        view = <SignUp2 setView={this.setView} userParams={this.state.userParams}/>;
-      } else if (this.state.view.name === 'select-image') {
-        view = <SelectImage setView={this.setView} userParams={this.state.userParams} previousView={this.state.previousView} saveSelectedData={this.saveSelectedData}/>;
-      } else if (this.state.view.name === 'postHome') {
-        view = <PostHome setView={this.setView} saveSelectedPicture={this.saveSelectedPicture} saveSelectedData={this.saveSelectedData} saveUsersFollowers={this.saveUsersFollowers}/>;
-      } else if (this.state.view.name === 'introspect') {
-        view = <Introspect saveSelectedPictureHeight={this.saveSelectedPictureHeight} setView={this.setView} selectedPicture={this.state.selectedPicture} previousView={this.state.previousView}/>;
-      } else if (this.state.view.name === 'canvas') {
-        view = <Canvas userParams={this.state.userParams} setView={this.setView} selectedPicture={this.state.selectedPicture} selectedPictureHeight={this.state.selectedPictureHeight}/>;
+      if (this.state.width < 1024) {
+        view = <Mobile />
       } else {
-        view = <Footer setView={this.setView} saveSelectedData={this.saveSelectedData}/>;
+        if (this.state.view.name === 'sign-up') {
+          view = <SignUp setView={this.setView} saveUserData={this.saveUserData} />;
+        } else if (this.state.view.name === 'sign-in') {
+          view = <SignIn setView={this.setView} saveUserData={this.saveUserData} />;
+        } else if (this.state.view.name === 'home') {
+          view = <Home setView={this.setView} userParams={this.state.userParams} saveSelectedData={this.saveSelectedData} />;
+        } else if (this.state.view.name === 'profile') {
+          view = <Profile setView={this.setView} userParams={this.state.userParams} saveUsersFollowers={this.saveUsersFollowers} saveSelectedPicture={this.saveSelectedPicture} selectedUserParams={this.state.selectedUserParams} saveSelectedData={this.saveSelectedData} previousView={this.state.previousView} followers={this.state.followers} />;
+        } else if (this.state.view.name === 'sign-up2') {
+          view = <SignUp2 setView={this.setView} userParams={this.state.userParams} />;
+        } else if (this.state.view.name === 'select-image') {
+          view = <SelectImage setView={this.setView} userParams={this.state.userParams} previousView={this.state.previousView} saveSelectedData={this.saveSelectedData} />;
+        } else if (this.state.view.name === 'postHome') {
+          view = <PostHome setView={this.setView} saveSelectedPicture={this.saveSelectedPicture} saveSelectedData={this.saveSelectedData} saveUsersFollowers={this.saveUsersFollowers} />;
+        } else if (this.state.view.name === 'introspect') {
+          view = <Introspect saveSelectedPictureHeight={this.saveSelectedPictureHeight} setView={this.setView} selectedPicture={this.state.selectedPicture} previousView={this.state.previousView} />;
+        } else if (this.state.view.name === 'canvas') {
+          view = <Canvas userParams={this.state.userParams} setView={this.setView} selectedPicture={this.state.selectedPicture} selectedPictureHeight={this.state.selectedPictureHeight} />;
+        } else {
+          view = <Footer setView={this.setView} saveSelectedData={this.saveSelectedData} />;
 
+        }
       }
 
       return (
         <div className="h-100">
-          { view }
+          {view}
         </div>
       );
     }
