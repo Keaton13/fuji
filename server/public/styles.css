@@ -47,6 +47,9 @@
 .Mg3 {
   margin-top: 15%;
 }
+.Mg5 {
+  margin-top: 10%;
+}
 .MgCustomProfilePic {
   margin-top: 37%;
 }
@@ -375,6 +378,7 @@ html, body, #root, .App {
   background-repeat: 'no-repeat';
   width: '100vw';
   height: '100vh';
+  max-width: 100%;
 }
 @keyframes lds-ring {
   0% {
