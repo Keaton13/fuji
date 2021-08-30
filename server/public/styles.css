@@ -369,10 +369,10 @@ html, body, #root, .App {
 }
 
 .backgroundImage2 {
-  background-image: url(../public/images/90-902257_black-and-white-mountain.jpg);
-  backgroundPosition: 'center';
-  backgroundSize: 'cover';
-  backgroundRepeat: 'no-repeat';
+  background-image: url(/images/90-902257_black-and-white-mountain.jpg);
+  background-position: 'center';
+  background-size: 'cover';
+  background-repeat: 'no-repeat';
   width: '100vw';
   height: '100vh';
 }
